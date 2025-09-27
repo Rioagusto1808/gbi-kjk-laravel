@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
+
+        // app/Http/Controllers/EventController.php
+public function publicIndex()
+{
+    $event = \App\Models\Event::where('status', '!=', 'Selesai')
+        ->orderByDesc('tanggal_mulai')
+        ->paginate(12);
+
+    return view('landing.event.index', compact('event'));
+}
+
     public function index()
     {
         $event = Event::latest()->paginate(10);
@@ -81,4 +92,5 @@ class EventController extends Controller
     {
         return view('jemaat.event.show', compact('event'));
     }
+
 }

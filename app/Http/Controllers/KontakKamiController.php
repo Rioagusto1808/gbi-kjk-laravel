@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KontakKamiRequest;
+use App\Mail\PesanBaruMail;
 use App\Models\KontakKami;
+use App\Models\User;
+use App\Notifications\PesanBaruNotif;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -12,10 +15,15 @@ class KontakKamiController extends Controller
     // 👉 Store pesan dari beranda
     public function store(KontakKamiRequest $request)
     {
-        KontakKami::create($request->validated());
+        $data = $request->validated();
+        KontakKami::create($data);
+        
+        $admin = User::where('email', 'admin@gmail.com')->first();
 
-        // Opsional kirim email notifikasi admin
-        // Mail::to(config('mail.from.address'))->send(new PesanBaruMail($request->validated()));
+        if ($admin) {
+            $admin->notify(new \App\Notifications\PesanBaruNotif($data));
+        }
+
 
         return back()->with('success', 'Pesan berhasil dikirim. Kami akan segera merespon.');
     }

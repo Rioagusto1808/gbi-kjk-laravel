@@ -8,7 +8,8 @@
     @vite('resources/css/app.css')
     @stack('styles')
     <link rel="icon" href="{{ asset('images/logo-gbi.jpg') }}" type="image/jpg">
-    <meta name="description" content="GBI KJK adalah gereja sel apostolik dan profetik, dipenuhi kuasa Roh Kudus, bergerak dalam Amanat Agung untuk menjadikan semua bangsa murid Kristus.">
+    <meta name="description"
+        content="GBI KJK adalah gereja sel apostolik dan profetik, dipenuhi kuasa Roh Kudus, bergerak dalam Amanat Agung untuk menjadikan semua bangsa murid Kristus.">
     <meta name="keywords" content="GBI KJK, Gereja, Ibadah, Kotabumi, Lampung, Renungan, Event, Berita">
     <meta name="author" content="GBI KJK">
 
@@ -27,12 +28,11 @@
 
             {{-- Menu Desktop --}}
             <nav class="hidden md:flex space-x-6 font-medium text-gray-700">
-                <a href="/" class="hover:text-red-700">Beranda</a>
+                <a href="{{ route('home') }}" class="hover:text-red-700">Beranda</a>
                 <a href="{{ route('berita.public.index') }}" class="hover:text-red-700">Berita</a>
-                <a href="#galeri" class="hover:text-red-700">Galeri</a>
-                <a href="#renungan" class="hover:text-red-700">Renungan</a>
-                <a href="#jadwal" class="hover:text-red-700">Jadwal</a>
-                <a href="#event" class="hover:text-red-700">Event</a>
+                <a href="{{ route('renungan.public.index') }}" class="hover:text-red-700">Renungan</a>
+                <a href="{{ route('jadwal.public.index') }}" class="hover:text-red-700">Jadwal</a>
+                <a href="{{ route('event.public.index') }}" class="hover:text-red-700">Event</a>
             </nav>
 
             {{-- Right side --}}
@@ -65,13 +65,29 @@
         {{-- Mobile menu --}}
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
             <nav class="flex flex-col space-y-2 p-4">
-                <a href="/" class="hover:text-red-700">Beranda</a>
-                <a href="#berita" class="hover:text-red-700">Berita</a>
-                <a href="#renungan" class="hover:text-red-700">Renungan</a>
-                <a href="#jadwal" class="hover:text-red-700">Jadwal</a>
-                <a href="#event" class="hover:text-red-700">Event</a>
-                <a href="#kontak" class="hover:text-red-700">Kontak</a>
-                <a href="{{ route('login') }}" class="text-red-700 font-bold">Login</a>
+                <a href="{{ route('home') }}" class="hover:text-red-700">Beranda</a>
+                <a href="{{ route('berita.public.index') }}" class="hover:text-red-700">Berita</a>
+                <a href="{{ route('renungan.public.index') }}" class="hover:text-red-700">Renungan</a>
+                <a href="{{ route('jadwal.public.index') }}" class="hover:text-red-700">Jadwal</a>
+                <a href="{{ route('event.public.index') }}" class="hover:text-red-700">Event</a>
+                @guest
+                    <div class="flex">
+                        <a href="{{ route('login') }}"
+                            class="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800 transition">
+                            Masuk
+                        </a>
+                        <a href="{{ route('register') }}"
+                            class="ml-2 px-4 py-2 border border-red-700 text-red-700 rounded hover:bg-red-100 transition">
+                            Daftar
+                        </a>
+                    </div>
+                @endguest
+                @auth
+                    <a href="{{ route('dashboard') }}"
+                        class="w-[110px] px-4 py-2 bg-white-700 text-red-800 border border-red-800 rounded hover:bg-red-800 hover:text-white transition">
+                        Dashboard
+                    </a>
+                @endauth
             </nav>
         </div>
     </header>

@@ -43,16 +43,103 @@
             <div class="flex-1"></div>
 
             <!-- Right Section -->
-            <a href="{{ route('profile.edit') }}" class="flex items-center space-x-4">
-                @if (auth()->user()->jemaat && auth()->user()->jemaat->foto)
-                    {{-- Foto dari storage --}}
-                    <img src="{{ asset('storage/' . auth()->user()->jemaat->foto->path) }}" alt="Foto Profil"
-                        class="w-12 h-12 rounded-full object-cover border border-gray-300">
-                @else
-                    <img src="{{ asset('images/default_profile.jpg') }}" alt="Foto Profil"
-                        class="w-12 h-12 rounded-full object-cover border border-gray-300">
-                @endif
-            </a>
+            <div class="flex items-center gap-6" x-data="{ openNotif: false }" @click.outside="openNotif = false">
+
+                <!-- 🔔 Notifikasi -->
+                <div class="relative">
+                    <button @click="openNotif = !openNotif" class="text-gray-600 hover:text-orange-500 relative">
+                        <!-- Ikon lonceng -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-8">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M10.5 8.25h3l-3 4.5h3" />
+                        </svg>
+
+                        <!-- Badge jumlah unread -->
+                        @if (auth()->user()->unreadNotifications->count() > 0)
+                            <span
+                                class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                                {{ auth()->user()->unreadNotifications->count() }}
+                            </span>
+                        @endif
+                    </button>
+
+                    <div x-show="openNotif" x-transition
+                        class="fixed inset-0 z-50 flex items-start sm:items-start justify-center sm:justify-end px-4 sm:px-0"
+                        @keydown.escape.window="openNotif = false">
+
+                        <!-- Background hitam transparan -->
+                        <div class="fixed inset-0 bg-black bg-opacity-30 sm:hidden" @click="openNotif = false"></div>
+
+                        <!-- Box Notifikasi -->
+                        <div
+                            class="relative mt-20 sm:mt-3 w-full sm:w-96 max-w-md bg-white rounded-lg shadow-lg border border-gray-200">
+                            <div class="p-4 border-b font-semibold text-gray-700 flex justify-between items-center">
+                                <span>Notifikasi</span>
+                                @if (auth()->user()->unreadNotifications->count() > 0)
+                                    <form method="POST" action="{{ route('notifications.readall') }}">
+                                        @csrf
+                                        <button type="submit" class="text-xs text-indigo-600 hover:underline">
+                                            Tandai semua sudah dibaca
+                                        </button>
+                                    </form>
+                                @endif
+                            </div>
+
+                            <ul class="max-h-80 overflow-y-auto divide-y divide-gray-200">
+                                @forelse(auth()->user()->notifications->take(7) as $notif)
+                                    <li
+                                        class="p-4 hover:bg-gray-50 transition flex items-start gap-3 
+                    {{ is_null($notif->read_at) ? 'bg-orange-50 border-l-4 border-orange-400' : '' }}">
+                                        <div class="flex-shrink-0 mt-1">
+                                            @if (is_null($notif->read_at))
+                                                <span class="w-3 h-3 bg-orange-500 rounded-full inline-block"></span>
+                                            @else
+                                                <span class="w-3 h-3 bg-gray-300 rounded-full inline-block"></span>
+                                            @endif
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex justify-between items-center">
+                                                <p class="text-sm font-semibold text-gray-800">
+                                                    {{ $notif->data['nama'] }}
+                                                </p>
+                                                <span class="text-[11px] text-gray-400">
+                                                    {{ $notif->created_at->diffForHumans() }}
+                                                </span>
+                                            </div>
+                                            <p class="text-xs text-gray-600">{{ $notif->data['email'] }}</p>
+                                            <p class="mt-1 text-sm text-gray-700 leading-snug">
+                                                {{ $notif->data['pesan'] }}</p>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <li class="p-6 text-center text-gray-500 text-sm">
+                                        Belum ada notifikasi.
+                                    </li>
+                                @endforelse
+                            </ul>
+
+                            <div class="p-3 text-center border-t">
+                                <a href="{{ route('notifications.all') }}"
+                                    class="text-xs text-indigo-600 hover:underline">
+                                    Lihat Semua →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foto Profil -->
+                <a href="{{ route('profile.edit') }}" class="flex items-center">
+                    @if (auth()->user()->jemaat && auth()->user()->jemaat->foto)
+                        <img src="{{ asset('storage/' . auth()->user()->jemaat->foto->path) }}" alt="Foto Profil"
+                            class="w-12 h-12 rounded-full object-cover border border-gray-300">
+                    @else
+                        <img src="{{ asset('images/default_profile.jpg') }}" alt="Foto Profil"
+                            class="w-12 h-12 rounded-full object-cover border border-gray-300">
+                    @endif
+                </a>
+            </div>
 
         </header>
 

@@ -101,4 +101,12 @@ class IbadahController extends Controller
 
         return view('admin.ibadah.history', compact('ibadah'));
     }
+
+    public function indexPublic()
+    {
+        $jadwal = Ibadah::orderBy('tanggal_mulai', 'desc')
+            ->paginate(9); // tampil 9 per halaman
+
+        return view('landing.jadwal.index', compact('jadwal'));
+    }
 }

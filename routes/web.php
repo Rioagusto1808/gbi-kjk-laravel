@@ -13,6 +13,7 @@ use App\Http\Controllers\JemaatController;
 use App\Http\Controllers\KeluargaController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\KontakKamiController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\ProfileController;
@@ -34,8 +35,15 @@ Route::get('/berita', [BeritaController::class, 'indexPublic'])
 Route::get('/berita/{berita}', [BeritaController::class, 'show'])
     ->name('berita.public.show');
 
-    Route::get('/renungan', [RenunganController::class, 'indexPublic'])->name('renungan.public.index');
-Route::get('/renungan/{renungan}', [RenunganController::class, 'show'])->name('renungan.public.show');
+    // Renungan publik
+Route::get('/renungan', [RenunganController::class, 'indexPublic'])->name('renungan.public.index');
+Route::get('/renungan/{renungan}', [RenunganController::class, 'showPublic'])->name('renungan.public.show');
+
+Route::get('/jadwal', [IbadahController::class, 'indexPublic'])
+    ->name('jadwal.public.index');
+
+Route::get('/events', [EventController::class, 'publicIndex'])
+    ->name('event.public.index');
 
 Route::post('/kontak-kami', [KontakKamiController::class, 'store'])
     ->name('kontak.store');
@@ -54,6 +62,17 @@ Route::middleware(['auth', 'check_status_user'])->group(function () {
             return redirect()->route('jemaat.dashboard');
         }
     })->name('dashboard');
+
+    Route::get('/notifications', [NotificationController::class, 'index'])
+        ->name('notifications.all');
+
+    // Tandai semua sudah dibaca
+    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])
+        ->name('notifications.readall');
+
+    // Tandai satu notifikasi sudah dibaca (opsional)
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'read'])
+        ->name('notifications.read');
 
     // ================= Profil Jemaat =================
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

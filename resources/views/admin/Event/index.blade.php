@@ -18,12 +18,11 @@
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($event as $e)
                 <div class="bg-white rounded-lg shadow hover:shadow-lg transition flex flex-col">
-                    
+
                     {{-- Gambar Event --}}
                     @if ($e->image)
-                        <img src="{{ Storage::url($e->image) }}" 
-                             alt="{{ $e->nama_event }}" 
-                             class="w-full h-40 object-cover rounded-t">
+                        <img src="{{ Storage::url($e->image) }}" alt="{{ $e->nama_event }}"
+                            class="w-full h-40 object-cover rounded-t">
                     @else
                         <div class="w-full h-40 bg-gray-200 flex items-center justify-center rounded-t">
                             <span class="text-gray-500 text-sm">Tidak ada gambar</span>
@@ -78,8 +77,8 @@
                                     class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-900 font-medium">
                                     <x-heroicon-o-pencil-square class="w-4 h-4" /> Edit
                                 </a>
-                                <form id="delete-form-{{ $e->id }}" action="{{ route('event.destroy', $e->id) }}"
-                                    method="POST" class="hidden">
+                                <form id="delete-form-{{ $e->id }}"
+                                    action="{{ route('event.destroy', $e->id) }}" method="POST" class="hidden">
                                     @csrf
                                     @method('DELETE')
                                 </form>

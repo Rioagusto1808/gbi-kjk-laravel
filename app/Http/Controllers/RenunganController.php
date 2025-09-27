@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RenunganRequest;
+use App\Models\Berita;
 use App\Models\Renungan;
 
 class RenunganController extends Controller
@@ -26,6 +27,28 @@ class RenunganController extends Controller
         return view('jemaat.renungan.show', compact('renungan'));
     }
 
+    public function indexPublic()
+{
+    $renungan = Renungan::where('status', 'publish')
+        ->orderBy('created_at', 'desc')
+        ->paginate(9);
+
+    return view('landing.renungan.index', compact('renungan'));
+}
+
+public function showPublic(Renungan $renungan)
+{
+    abort_if($renungan->status !== 'publish', 403);
+
+    // ambil 5 berita terbaru untuk sidebar
+    $berita = Berita::with('files')
+        ->whereNotNull('published_at')
+        ->orderByDesc('published_at')
+        ->limit(5)
+        ->get();
+
+    return view('landing.renungan.show', compact('renungan', 'berita'));
+}
     /**
      * Admin -> list semua renungan (CRUD).
      */

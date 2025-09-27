@@ -23,12 +23,12 @@ class BerandaController extends Controller
         $renungan = Renungan::latest()->take(4)->get();
 
         // ambil jadwal ibadah terdekat
-        $jadwal = Ibadah::upcoming()->take(6)->get();
+        $jadwal = Ibadah::latest()->get();
 
         // ambil event terbaru
-        $event = Event::latest()->take(6)->get();
+        $event = Event::latest()->get();
 
-        $galeri = Galeri::latest()->take(6)->get();
+        $galeri = Galeri::latest()->get();
 
         return view('landing.index', compact('berita', 'renungan', 'jadwal', 'event', 'carousels', 'galeri'));
     }
