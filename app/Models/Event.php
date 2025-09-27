@@ -15,6 +15,7 @@ class Event extends Model
 
     protected $fillable = [
         'nama_event',
+        'image',
         'deskripsi',
         'tanggal_mulai',
         'tanggal_selesai',
@@ -24,9 +25,9 @@ class Event extends Model
     ];
 
     protected $casts = [
-        'tanggal_mulai'   => 'datetime',
+        'tanggal_mulai' => 'datetime',
         'tanggal_selesai' => 'datetime',
-        'biaya'           => 'decimal:2',
+        'biaya' => 'decimal:2',
     ];
 
     public function peserta()

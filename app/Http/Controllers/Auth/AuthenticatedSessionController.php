@@ -31,8 +31,9 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         // Cek apakah jemaat masih aktif
-        if ($user->jemaat && !$user->jemaat->aktif) {
+        if ($user->jemaat && ! $user->jemaat->aktif) {
             Auth::logout();
+
             return redirect()->route('login')->withErrors([
                 'email' => 'Akun Anda tidak aktif, silakan hubungi admin.',
             ]);
@@ -45,7 +46,6 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('jemaat.dashboard');
         }
     }
-
 
     /**
      * Destroy an authenticated session.

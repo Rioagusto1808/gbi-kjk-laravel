@@ -20,11 +20,11 @@ class BeritaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul'        => 'required|string|max:255',
-            'isi'          => 'required|string',
-            'author_id'    => 'nullable|exists:users,id',
+            'judul' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'author_id' => 'nullable|exists:users,id',
             'published_at' => 'nullable|date',
-            'foto.*'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto.*' => 'nullable|image|mimes:jpg,jpeg,png|max:5240',
         ];
     }
 
@@ -34,12 +34,12 @@ class BeritaRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'judul.required'   => 'Judul berita wajib diisi.',
-            'judul.string'     => 'Judul berita harus berupa teks.',
-            'judul.max'        => 'Judul berita maksimal 255 karakter.',
+            'judul.required' => 'Judul berita wajib diisi.',
+            'judul.string' => 'Judul berita harus berupa teks.',
+            'judul.max' => 'Judul berita maksimal 255 karakter.',
 
-            'isi.required'     => 'Isi berita wajib diisi.',
-            'isi.string'       => 'Isi berita harus berupa teks.',
+            'isi.required' => 'Isi berita wajib diisi.',
+            'isi.string' => 'Isi berita harus berupa teks.',
 
             'author_id.exists' => 'Author tidak ditemukan pada data pengguna.',
 
@@ -47,7 +47,7 @@ class BeritaRequest extends FormRequest
 
             'foto.*.image' => 'File harus berupa gambar.',
             'foto.*.mimes' => 'Foto hanya boleh berformat JPG, JPEG, atau PNG.',
-            'foto.*.max'   => 'Ukuran foto maksimal 2MB.',
+            'foto.*.max' => 'Ukuran foto maksimal 5MB.',
         ];
     }
 }

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->text('isi');
             $table->text('doa')->nullable();
             $table->string('penulis')->nullable();
-            $table->enum('status', ['draft','publish'])
-                  ->default('publish')->index();
+            $table->enum('status', ['draft', 'publish'])
+                ->default('publish')->index();
             $table->timestamps();
         });
     }

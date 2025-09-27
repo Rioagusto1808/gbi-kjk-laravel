@@ -13,6 +13,7 @@ class PelayananController extends Controller
     public function index()
     {
         $pelayanan = Pelayanan::withCount('jemaat')->paginate(10);
+
         return view('admin.pelayanan.index', compact('pelayanan'));
     }
 
@@ -22,6 +23,7 @@ class PelayananController extends Controller
     public function jemaatIndex()
     {
         $pelayanan = Pelayanan::withCount('jemaat')->paginate(10);
+
         return view('jemaat.pelayanan.index', compact('pelayanan'));
     }
 
@@ -50,7 +52,8 @@ class PelayananController extends Controller
     public function show(Pelayanan $pelayanan)
     {
         $pelayanan->load('jemaat');
-        return view('pelayanan.show', compact('pelayanan'));
+
+        return view('jemaat.pelayanan.show', compact('pelayanan'));
     }
 
     /**

@@ -22,7 +22,7 @@ class PelayananRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama' => 'required|string|max:255|unique:pelayanan,nama,' . $this->id,
+            'nama' => 'required|string|max:255|unique:pelayanan,nama,'.$this->id,
             'deskripsi' => 'nullable|string',
         ];
     }

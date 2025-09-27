@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Ibadah;
+use App\Models\User;
 
 class IbadahPolicy
 {

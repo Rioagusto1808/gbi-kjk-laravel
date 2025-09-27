@@ -4,16 +4,14 @@
 <div>
     <x-input-label for="judul" :value="__('Judul Berita')" />
     <x-text-input id="judul" type="text" name="judul"
-        value="{{ is_string(old('judul')) ? old('judul') : ($berita->judul ?? '') }}"
-        class="w-full mt-1" required />
+        value="{{ is_string(old('judul')) ? old('judul') : $berita->judul ?? '' }}" class="w-full mt-1" required />
     <x-input-error :messages="$errors->get('judul')" class="mt-1" />
 </div>
 
 <!-- Isi -->
 <div>
     <x-input-label for="isi" :value="__('Isi Berita')" />
-    <textarea id="isi" name="isi" rows="5"
-        class="w-full mt-1 border-gray-300 rounded-md">{{ is_string(old('isi')) ? old('isi') : ($berita->isi ?? '') }}</textarea>
+    <textarea id="isi" name="isi" rows="5" class="w-full mt-1 border-gray-300 rounded-md">{{ is_string(old('isi')) ? old('isi') : $berita->isi ?? '' }}</textarea>
     <x-input-error :messages="$errors->get('isi')" class="mt-1" />
 </div>
 
@@ -29,18 +27,16 @@
 <!-- Upload Foto -->
 <div>
     <x-input-label for="foto" :value="__('Foto Berita')" />
-    <input type="file" id="foto" name="foto[]" multiple
-           class="w-full mt-1 border-gray-300 rounded-md" />
+    <input type="file" id="foto" name="foto[]" multiple class="w-full mt-1 border-gray-300 rounded-md" />
+    <x-input-error :messages="collect($errors->get('foto.*'))->flatten()" class="mt-1" />
     <p class="text-sm text-gray-500 mt-1">Bisa pilih lebih dari satu foto.</p>
-    <x-input-error :messages="$errors->get('foto.*')" class="mt-1" />
     <div class="mt-3 grid grid-cols-2 md:grid-cols-3 gap-3 preview-container"></div>
-    @if(isset($berita) && $berita->files->count())
+    @if (isset($berita) && $berita->files->count())
         <div class="mt-3 grid grid-cols-2 md:grid-cols-3 gap-3">
-            @foreach($berita->files as $file)
+            @foreach ($berita->files as $file)
                 <div class="relative">
-                    <img src="{{ asset('storage/'.$file->path) }}"
-                         alt="{{ $file->nama_asli }}"
-                         class="w-full h-32 object-cover rounded shadow" />
+                    <img src="{{ asset('storage/' . $file->path) }}" alt="{{ $file->nama_asli }}"
+                        class="w-full h-32 object-cover rounded shadow" />
                     <p class="text-xs text-center mt-1 text-gray-600 truncate">
                         {{ $file->nama_asli }}
                     </p>
@@ -53,37 +49,37 @@
 <!-- Tombol -->
 <div class="flex gap-2 justify-end">
     <a href="{{ route('berita.index') }}"
-       class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">Batal</a>
-    <button type="submit"
-       class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Simpan</button>
+        class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">Batal</a>
+    <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Simpan</button>
 </div>
 @push('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const fileInputs = document.querySelectorAll('input[type="file"][name="foto[]"]');
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fileInputs = document.querySelectorAll('input[type="file"][name="foto[]"]');
 
-        fileInputs.forEach(input => {
-            input.addEventListener("change", function (e) {
-                const previewContainer = input.closest('div').querySelector(".preview-container");
-                if (!previewContainer) return;
+            fileInputs.forEach(input => {
+                input.addEventListener("change", function(e) {
+                    const previewContainer = input.closest('div').querySelector(
+                        ".preview-container");
+                    if (!previewContainer) return;
 
-                previewContainer.innerHTML = ""; // clear preview lama
+                    previewContainer.innerHTML = ""; // clear preview lama
 
-                Array.from(e.target.files).forEach(file => {
-                    if (!file.type.startsWith("image/")) return;
+                    Array.from(e.target.files).forEach(file => {
+                        if (!file.type.startsWith("image/")) return;
 
-                    const reader = new FileReader();
-                    reader.onload = function (event) {
-                        const img = document.createElement("img");
-                        img.src = event.target.result;
-                        img.classList.add("w-full", "h-32", "object-cover", "rounded", "shadow");
-                        previewContainer.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            const img = document.createElement("img");
+                            img.src = event.target.result;
+                            img.classList.add("w-full", "h-32", "object-cover",
+                                "rounded", "shadow");
+                            previewContainer.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    });
                 });
             });
         });
-    });
-</script>
+    </script>
 @endpush
-

@@ -27,5 +27,4 @@ class Pelayanan extends Model
     {
         return $this->hasMany(PelayananIbadah::class, 'pelayanan_id');
     }
-
 }

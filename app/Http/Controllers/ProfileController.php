@@ -9,7 +9,6 @@ use App\Models\Jemaat;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -43,60 +42,60 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
     public function updateJemaat(ProfileUpdateRequest $request)
-{
-    $user = $request->user();
+    {
+        $user = $request->user();
 
-    // Data jemaat biasa
-    $data = $request->only([
-        'no_hp',
-        'jenis_kelamin',
-        'tanggal_lahir',
-        'alamat',
-        'status_pernikahan',
-        'pekerjaan',
-    ]);
-    $data['name'] = $request->jemaat_name;
+        // Data jemaat biasa
+        $data = $request->only([
+            'no_hp',
+            'jenis_kelamin',
+            'tanggal_lahir',
+            'alamat',
+            'status_pernikahan',
+            'pekerjaan',
+        ]);
+        $data['name'] = $request->jemaat_name;
 
-    // Handle foto base64
-    if ($request->filled('foto')) {
-        $image = $request->input('foto');
-        $image = str_replace('data:image/png;base64,', '', $image);
-        $image = str_replace(' ', '+', $image);
+        // Handle foto base64
+        if ($request->filled('foto')) {
+            $image = $request->input('foto');
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
 
-        $imageName = 'foto_' . time() . '.png';
-        $path = 'uploads/foto/' . $imageName;
+            $imageName = 'foto_'.time().'.png';
+            $path = 'uploads/foto/'.$imageName;
 
-        // Simpan file baru ke storage
-        Storage::disk('public')->put($path, base64_decode($image));
+            // Simpan file baru ke storage
+            Storage::disk('public')->put($path, base64_decode($image));
 
-        // Kalau ada foto lama → hapus dulu
-        if ($user->jemaat && $user->jemaat->foto) {
-            Storage::disk('public')->delete($user->jemaat->foto->path); // hapus file lama
-            $user->jemaat->foto->delete(); // hapus record lama dari tabel files (pakai soft delete kalau File pakai SoftDeletes)
+            // Kalau ada foto lama → hapus dulu
+            if ($user->jemaat && $user->jemaat->foto) {
+                Storage::disk('public')->delete($user->jemaat->foto->path); // hapus file lama
+                $user->jemaat->foto->delete(); // hapus record lama dari tabel files (pakai soft delete kalau File pakai SoftDeletes)
+            }
+
+            // Buat record baru di tabel files
+            $fileRecord = \App\Models\File::create([
+                'nama_asli' => $imageName,
+                'path' => $path,
+                'mime_type' => 'image/png',
+                'size' => strlen($image),
+                'kategori' => 'foto_profil',
+            ]);
+
+            $data['foto_id'] = $fileRecord->id;
         }
 
-        // Buat record baru di tabel files
-        $fileRecord = \App\Models\File::create([
-            'nama_asli' => $imageName,
-            'path'      => $path,
-            'mime_type' => 'image/png',
-            'size'      => strlen($image),
-            'kategori'  => 'foto_profil',
-        ]);
+        // Update atau buat jemaat
+        if ($user->jemaat) {
+            $user->jemaat->update($data);
+        } else {
+            $jemaat = \App\Models\Jemaat::create($data);
+            $user->update(['jemaat_id' => $jemaat->id]);
+        }
 
-        $data['foto_id'] = $fileRecord->id;
-    }
-
-    // Update atau buat jemaat
-    if ($user->jemaat) {
-        $user->jemaat->update($data);
-    } else {
-        $jemaat = \App\Models\Jemaat::create($data);
-        $user->update(['jemaat_id' => $jemaat->id]);
-    }
-
-    return redirect()->route('profile.edit')
-        ->with('success', 'Biodata jemaat berhasil diperbarui.');
+        return redirect()->route('profile.edit')
+            ->with('success', 'Biodata jemaat berhasil diperbarui.');
     }
 
     /**

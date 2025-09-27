@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Jemaat;
+use App\Models\User;
 
 class JemaatPolicy
 {
@@ -11,7 +11,7 @@ class JemaatPolicy
     {
         return $user->hasRole(['superadmin', 'admin', 'staff']);
     }
-    
+
     public function view(User $user, Jemaat $jemaat): bool
     {
         return $user->hasRole(['superadmin', 'admin', 'staff'])

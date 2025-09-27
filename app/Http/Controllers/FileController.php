@@ -11,6 +11,7 @@ class FileController extends Controller
     public function index()
     {
         $files = File::with('uploader')->paginate(20);
+
         return response()->json($files);
     }
 
@@ -44,5 +45,3 @@ class FileController extends Controller
         return response()->json(['message' => 'File dihapus']);
     }
 }
-
-

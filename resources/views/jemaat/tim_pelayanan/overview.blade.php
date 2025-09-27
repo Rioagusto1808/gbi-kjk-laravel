@@ -5,9 +5,9 @@
         <h2 class="text-2xl font-merriweather font-semibold text-gray-800">Tim Pelayanan</h2>
     </div>
 
-    @if($ibadah->count())
+    @if ($ibadah->count())
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach($ibadah as $i)
+            @foreach ($ibadah as $i)
                 <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-5 flex flex-col justify-between">
                     <!-- Info Ibadah -->
                     <div class="mb-3">
@@ -18,7 +18,7 @@
                         <p class="text-sm text-gray-500">
                             <x-heroicon-o-calendar class="w-4 h-4 inline mr-1 text-indigo-500" />
                             {{ $i->tanggal_mulai?->format('d M Y H:i') }}
-                            @if($i->tanggal_selesai)
+                            @if ($i->tanggal_selesai)
                                 - {{ $i->tanggal_selesai->format('H:i') }}
                             @endif
                         </p>
@@ -43,7 +43,7 @@
                     <!-- Status Ibadah -->
                     <div class="mt-4">
                         @php
-                            $color = match($i->status) {
+                            $color = match ($i->status) {
                                 'Akan Datang' => 'bg-yellow-100 text-yellow-700',
                                 'Sedang Berlangsung' => 'bg-blue-100 text-blue-700',
                                 'Selesai' => 'bg-green-100 text-green-700',

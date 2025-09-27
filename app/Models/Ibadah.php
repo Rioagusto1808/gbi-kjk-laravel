@@ -24,8 +24,8 @@ class Ibadah extends Model
     ];
 
     protected $casts = [
-    'tanggal_mulai'   => 'datetime',
-    'tanggal_selesai' => 'datetime',
+        'tanggal_mulai' => 'datetime',
+        'tanggal_selesai' => 'datetime',
     ];
 
     // Relasi ke absensi jemaat
@@ -53,5 +53,4 @@ class Ibadah extends Model
     {
         return $this->hasMany(pelayananIbadah::class, 'ibadah_id');
     }
-
 }

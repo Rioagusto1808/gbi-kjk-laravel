@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Berita extends Model
 {
-
     protected $table = 'berita';
 
     protected $fillable = [
@@ -18,6 +16,8 @@ class Berita extends Model
     ];
 
     protected $casts = [
+        'judul' => 'string',
+        'isi' => 'string',
         'published_at' => 'datetime',
     ];
 
@@ -43,5 +43,9 @@ class Berita extends Model
     public function attachments()
     {
         return $this->files()->wherePivot('tipe', 'lampiran');
+    }
+public function getRouteKeyName()
+    {
+        return 'id'; // atau 'slug' kalau kamu punya kolom slug
     }
 }

@@ -73,5 +73,4 @@ class Jemaat extends Model
     {
         return $this->hasMany(PelayananIbadah::class, 'jemaat_id');
     }
-
 }

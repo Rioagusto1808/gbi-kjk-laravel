@@ -8,7 +8,7 @@
         <p class="text-sm text-gray-700">
             <x-heroicon-o-calendar class="w-4 h-4 inline mr-1 text-indigo-500" />
             {{ $event->tanggal_mulai->format('d M Y H:i') }}
-            @if($event->tanggal_selesai)
+            @if ($event->tanggal_selesai)
                 - {{ $event->tanggal_selesai->format('d M Y H:i') }}
             @endif
         </p>
@@ -19,12 +19,13 @@
 
         <div class="mt-6">
             @php
-                $sudahDaftar = $event->peserta()
+                $sudahDaftar = $event
+                    ->peserta()
                     ->where('jemaat_id', auth()->user()->jemaat->id ?? null)
                     ->exists();
             @endphp
 
-            @if($sudahDaftar)
+            @if ($sudahDaftar)
                 <button class="px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>
                     ✅ Sudah Terdaftar
                 </button>

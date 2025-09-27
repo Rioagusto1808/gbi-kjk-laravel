@@ -4,7 +4,7 @@
 <div>
     <x-input-label for="jenis" :value="__('Jenis Ibadah')" />
     <select name="jenis" id="jenis" class="w-full mt-1 border-gray-300 rounded-md">
-        @foreach(['Umum','Sekolah Minggu','Youth','Doa','Lainnya'] as $opt)
+        @foreach (['Umum', 'Sekolah Minggu', 'Youth', 'Doa', 'Lainnya'] as $opt)
             <option value="{{ $opt }}" {{ old('jenis', $ibadah->jenis ?? '') === $opt ? 'selected' : '' }}>
                 {{ $opt }}
             </option>
@@ -34,32 +34,32 @@
 <!-- Lokasi -->
 <div>
     <x-input-label for="lokasi" :value="__('Lokasi')" />
-    <x-text-input id="lokasi" type="text" name="lokasi"
-        value="{{ old('lokasi', $ibadah->lokasi ?? '') }}" class="w-full mt-1" />
+    <x-text-input id="lokasi" type="text" name="lokasi" value="{{ old('lokasi', $ibadah->lokasi ?? '') }}"
+        class="w-full mt-1" />
     <x-input-error :messages="$errors->get('lokasi')" class="mt-1" />
 </div>
 
 <!-- Tema -->
 <div>
     <x-input-label for="tema" :value="__('Tema')" />
-    <x-text-input id="tema" type="text" name="tema"
-        value="{{ old('tema', $ibadah->tema ?? '') }}" class="w-full mt-1" />
+    <x-text-input id="tema" type="text" name="tema" value="{{ old('tema', $ibadah->tema ?? '') }}"
+        class="w-full mt-1" />
     <x-input-error :messages="$errors->get('tema')" class="mt-1" />
 </div>
 
 <!-- Ayat -->
 <div>
     <x-input-label for="ayat" :value="__('Ayat')" />
-    <x-text-input id="ayat" type="text" name="ayat"
-        value="{{ old('ayat', $ibadah->ayat ?? '') }}" class="w-full mt-1" />
+    <x-text-input id="ayat" type="text" name="ayat" value="{{ old('ayat', $ibadah->ayat ?? '') }}"
+        class="w-full mt-1" />
     <x-input-error :messages="$errors->get('ayat')" class="mt-1" />
 </div>
 
 <!-- Gembala -->
 <div>
     <x-input-label for="gembala" :value="__('Gembala')" />
-    <x-text-input id="gembala" type="text" name="gembala"
-        value="{{ old('gembala', $ibadah->gembala ?? '') }}" class="w-full mt-1" />
+    <x-text-input id="gembala" type="text" name="gembala" value="{{ old('gembala', $ibadah->gembala ?? '') }}"
+        class="w-full mt-1" />
     <x-input-error :messages="$errors->get('gembala')" class="mt-1" />
 </div>
 
@@ -74,8 +74,9 @@
 <div>
     <x-input-label for="status" :value="__('Status')" />
     <select name="status" id="status" class="w-full mt-1 border-gray-300 rounded-md">
-        @foreach(['Akan Datang','Sedang Berlangsung','Selesai'] as $opt)
-            <option value="{{ $opt }}" {{ old('status', $ibadah->status ?? 'Akan Datang') === $opt ? 'selected' : '' }}>
+        @foreach (['Akan Datang', 'Sedang Berlangsung', 'Selesai'] as $opt)
+            <option value="{{ $opt }}"
+                {{ old('status', $ibadah->status ?? 'Akan Datang') === $opt ? 'selected' : '' }}>
                 {{ $opt }}
             </option>
         @endforeach
@@ -86,7 +87,6 @@
 <!-- Tombol -->
 <div class="flex gap-2 justify-end">
     <a href="{{ route('ibadah.index') }}"
-       class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">Batal</a>
-    <button type="submit"
-       class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Simpan</button>
+        class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">Batal</a>
+    <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Simpan</button>
 </div>

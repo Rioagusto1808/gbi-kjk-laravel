@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ibadah;
-use App\Models\Pelayanan;
 use App\Models\Jemaat;
+use App\Models\Pelayanan;
 use App\Models\PelayananIbadah;
 use Illuminate\Http\Request;
 
@@ -52,12 +52,12 @@ class TimPelayananController extends Controller
     {
         $validated = $request->validate([
             'pelayanan_id' => 'required|exists:pelayanan,id',
-            'jemaat_id'    => 'required|exists:jemaat,id',
+            'jemaat_id' => 'required|exists:jemaat,id',
         ]);
 
         PelayananIbadah::updateOrCreate(
             [
-                'ibadah_id'    => $ibadah->id,
+                'ibadah_id' => $ibadah->id,
                 'pelayanan_id' => $validated['pelayanan_id'],
             ],
             ['jemaat_id' => $validated['jemaat_id']]
@@ -85,7 +85,7 @@ class TimPelayananController extends Controller
     {
         $validated = $request->validate([
             'pelayanan_id' => 'required|exists:pelayanan,id',
-            'jemaat_id'    => 'required|exists:jemaat,id',
+            'jemaat_id' => 'required|exists:jemaat,id',
         ]);
 
         $timPelayanan->update($validated);
@@ -114,5 +114,4 @@ class TimPelayananController extends Controller
 
         return view('jemaat.tim_pelayanan.overview', compact('ibadah'));
     }
-
 }

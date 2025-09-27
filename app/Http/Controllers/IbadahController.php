@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ibadah;
 use App\Http\Requests\IbadahRequest;
+use App\Models\Ibadah;
 use Illuminate\Http\Request;
 
 class IbadahController extends Controller
@@ -25,7 +25,7 @@ class IbadahController extends Controller
      */
     public function show(Ibadah $ibadah)
     {
-        return view('ibadah.show', compact('ibadah'));
+        return view('jemaat.ibadah.show', compact('ibadah'));
     }
 
     /**
@@ -51,9 +51,9 @@ class IbadahController extends Controller
             $s = $request->string('search');
             $query->where(function ($q) use ($s) {
                 $q->where('jenis', 'like', "%{$s}%")
-                ->orWhere('tema', 'like', "%{$s}%")
-                ->orWhere('lokasi', 'like', "%{$s}%")
-                ->orWhere('gembala', 'like', "%{$s}%");
+                    ->orWhere('tema', 'like', "%{$s}%")
+                    ->orWhere('lokasi', 'like', "%{$s}%")
+                    ->orWhere('gembala', 'like', "%{$s}%");
             });
         }
 
@@ -61,7 +61,6 @@ class IbadahController extends Controller
 
         return view('admin.ibadah.index', compact('ibadah'));
     }
-
 
     public function create()
     {
@@ -71,6 +70,7 @@ class IbadahController extends Controller
     public function store(IbadahRequest $request)
     {
         Ibadah::create($request->validated());
+
         return redirect()->route('ibadah.index')->with('success', 'Ibadah berhasil ditambahkan.');
     }
 
@@ -82,12 +82,14 @@ class IbadahController extends Controller
     public function update(IbadahRequest $request, Ibadah $ibadah)
     {
         $ibadah->update($request->validated());
+
         return redirect()->route('ibadah.index')->with('success', 'Ibadah berhasil diperbarui.');
     }
 
     public function destroy(Ibadah $ibadah)
     {
         $ibadah->delete();
+
         return redirect()->route('ibadah.index')->with('success', 'Ibadah berhasil dihapus.');
     }
 

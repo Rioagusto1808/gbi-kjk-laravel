@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('event', function (Blueprint $table) {
             $table->id();
             $table->string('nama_event')->index();
+            $table->string('image')->nullable();
             $table->text('deskripsi')->nullable();
             $table->dateTime('tanggal_mulai')->index();
             $table->dateTime('tanggal_selesai')->nullable()->index();
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->string('tema')->nullable();
             $table->decimal('biaya', 15, 2)->nullable()->index();
             $table->enum('status', ['Akan Datang', 'Sedang Berlangsung', 'Selesai'])
-            ->default('Akan Datang')->index();
+                ->default('Akan Datang')->index();
             $table->timestamps();
             $table->softDeletes();
         });

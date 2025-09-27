@@ -5,9 +5,9 @@
         <h2 class="text-2xl font-semibold text-gray-800">Daftar Event</h2>
     </div>
 
-    @if($event->count())
+    @if ($event->count())
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach($event as $e)
+            @foreach ($event as $e)
                 <div class="bg-white rounded-lg shadow p-5 flex flex-col justify-between">
                     <div>
                         <h3 class="text-lg font-semibold text-gray-800">{{ $e->nama_event }}</h3>
@@ -24,16 +24,17 @@
                     </div>
 
                     <div class="mt-4 flex justify-between items-center">
-                        <a href="{{ route('jemaat.event.show', $e->id) }}"
-                           class="text-indigo-600 hover:underline">Lihat Detail</a>
+                        <a href="{{ route('jemaat.event.show', $e->id) }}" class="text-indigo-600 hover:underline">Lihat
+                            Detail</a>
 
                         @php
-                            $sudahDaftar = $e->peserta()
+                            $sudahDaftar = $e
+                                ->peserta()
                                 ->where('jemaat_id', auth()->user()->jemaat->id ?? null)
                                 ->exists();
                         @endphp
 
-                        @if($sudahDaftar)
+                        @if ($sudahDaftar)
                             <span class="px-3 py-1 bg-gray-400 text-white rounded-md text-xs">✅ Terdaftar</span>
                         @endif
                     </div>

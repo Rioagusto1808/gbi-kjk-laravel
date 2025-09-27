@@ -15,7 +15,7 @@ class EventPesertaController extends Controller
     {
         $user = auth()->user();
 
-        if (!$user || !$user->jemaat) {
+        if (! $user || ! $user->jemaat) {
             return back()->with('error', 'Akun Anda tidak terkait dengan data jemaat.');
         }
 
@@ -34,9 +34,9 @@ class EventPesertaController extends Controller
         $status = $event->biaya && $event->biaya > 0 ? 'Daftar' : 'Dikonfirmasi';
 
         EventPeserta::create([
-            'event_id'  => $event->id,
+            'event_id' => $event->id,
             'jemaat_id' => $jemaat->id,
-            'status'    => $status,
+            'status' => $status,
         ]);
 
         return back()->with('success', 'Pendaftaran event berhasil.');
@@ -55,6 +55,7 @@ class EventPesertaController extends Controller
 
         return view('admin.event.peserta.index', compact('event', 'peserta'));
     }
+
     /**
      * Admin update status peserta (misalnya konfirmasi pembayaran).
      */
@@ -62,12 +63,12 @@ class EventPesertaController extends Controller
     {
         $request->validate([
             'status' => 'required|in:Daftar,Dikonfirmasi,Bayar,Batal',
-            'hadir'  => 'nullable|boolean',
+            'hadir' => 'nullable|boolean',
         ]);
 
         $peserta->update([
             'status' => $request->status,
-            'hadir'  => $request->boolean('hadir'),
+            'hadir' => $request->boolean('hadir'),
         ]);
 
         return back()->with('success', 'Status peserta diperbarui.');

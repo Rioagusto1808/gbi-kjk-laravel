@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
     public function index()
     {
         $event = Event::latest()->paginate(10);
+
         return view('admin.event.index', compact('event'));
     }
 
@@ -20,7 +22,14 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        Event::create($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('event', 'public');
+        }
+
+        Event::create($data);
+
         return redirect()->route('event.index')->with('success', 'Event berhasil ditambahkan.');
     }
 
@@ -31,13 +40,28 @@ class EventController extends Controller
 
     public function update(EventRequest $request, Event $event)
     {
-        $event->update($request->validated());
+        $data = $request->validated();
+
+        // kalau ada gambar baru
+        if ($request->hasFile('image')) {
+            // hapus gambar lama
+            if ($event->image && Storage::disk('public')->exists($event->image)) {
+                Storage::disk('public')->delete($event->image);
+            }
+
+            // simpan gambar baru
+            $data['image'] = $request->file('image')->store('event', 'public');
+        }
+
+        $event->update($data);
+
         return redirect()->route('event.index')->with('success', 'Event berhasil diperbarui.');
     }
 
     public function destroy(Event $event)
     {
         $event->delete();
+
         return redirect()->route('event.index')->with('success', 'Event berhasil dihapus.');
     }
 
@@ -49,6 +73,7 @@ class EventController extends Controller
     public function jemaatIndex()
     {
         $event = Event::orderBy('tanggal_mulai', 'asc')->paginate(9);
+
         return view('jemaat.event.index', compact('event'));
     }
 

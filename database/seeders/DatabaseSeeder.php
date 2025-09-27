@@ -17,12 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PelayananSeeder::class);
 
         $super = User::firstOrCreate(
-        ['email' => 'admin@gmail.com'],
-        ['name' => 'Admin Gacor', 'password' => bcrypt('123')]
+            ['email' => 'admin@gmail.com'],
+            ['name' => 'Admin Gacor', 'password' => bcrypt('123')]
         );
 
         $super->assignRole('superadmin');
     }
-
-    
 }

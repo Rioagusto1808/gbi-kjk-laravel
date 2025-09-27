@@ -32,21 +32,24 @@
                             <!-- Restore -->
                             <form action="{{ route('jemaat.restore', $j->id) }}" method="POST" class="inline-block">
                                 @csrf
-                                <button class="inline-flex items-center gap-1 text-green-600 hover:text-green-900 font-medium">
+                                <button
+                                    class="inline-flex items-center gap-1 text-green-600 hover:text-green-900 font-medium">
                                     <x-heroicon-o-arrow-path class="w-4 h-4" />
                                     Restore
                                 </button>
                             </form>
-                            
+
                             <!-- Hapus Permanen -->
-                            <form id="delete-form-{{ $j->id }}" action="{{ route('jemaat.force-delete', $j->id) }}" method="POST" class="inline-block hidden">
+                            <form id="delete-form-{{ $j->id }}"
+                                action="{{ route('jemaat.force-delete', $j->id) }}" method="POST"
+                                class="inline-block hidden">
                                 @csrf
                                 @method('DELETE')
                             </form>
 
-                            <button type="button" 
-                                    onclick="confirmDelete('{{ $j->id }}', 'Yakin hapus jemaat {{ $j->name }}?', 'Data jemaat ini tidak bisa dipulihkan.')"
-                                    class="inline-flex items-center gap-1 text-red-600 hover:text-red-900 font-medium">
+                            <button type="button"
+                                onclick="confirmDelete('{{ $j->id }}', 'Yakin hapus jemaat {{ $j->name }}?', 'Data jemaat ini tidak bisa dipulihkan.')"
+                                class="inline-flex items-center gap-1 text-red-600 hover:text-red-900 font-medium">
                                 <x-heroicon-o-trash class="w-4 h-4" />
                                 Hapus
                             </button>

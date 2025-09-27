@@ -10,3 +10,17 @@
 .cropper-face {
     border-radius: 50% !important;
 }
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    } /* geser setengah aja */
+}
+
+.animate-marquee {
+    display: inline-flex;
+    animation: marquee 20s linear infinite;
+}

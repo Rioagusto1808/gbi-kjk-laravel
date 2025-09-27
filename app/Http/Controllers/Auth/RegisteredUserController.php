@@ -11,8 +11,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -31,25 +29,23 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(RegisterRequest $request): RedirectResponse
-{
+    {
 
-    $jemaat = Jemaat::create([
-        'name' => $request->name,
-        'aktif' => true,
-    ]);
+        $jemaat = Jemaat::create([
+            'name' => $request->name,
+            'aktif' => true,
+        ]);
 
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'jemaat_id' => $jemaat->id,
+        ]);
+        $user->assignRole('jemaat');
+        event(new Registered($user));
+        Auth::login($user);
 
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'jemaat_id' => $jemaat->id,
-    ]);
-    $user->assignRole('jemaat');
-    event(new Registered($user));
-    Auth::login($user);
-
-    return redirect()->route('dashboard');
-}
-
+        return redirect()->route('dashboard');
+    }
 }

@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($peserta as $p)
+                @foreach ($peserta as $p)
                     <tr class="border-t">
                         <td class="px-4 py-2">{{ $p->jemaat->name ?? '-' }}</td>
                         <td class="px-4 py-2">{{ $p->status }}</td>
@@ -22,14 +22,16 @@
                                 @csrf
                                 @method('PATCH')
                                 <select name="status" class="border rounded p-1 text-sm">
-                                    @foreach(['Daftar','Dikonfirmasi','Bayar','Batal'] as $status)
-                                        <option value="{{ $status }}" {{ $p->status === $status ? 'selected' : '' }}>
+                                    @foreach (['Daftar', 'Dikonfirmasi', 'Bayar', 'Batal'] as $status)
+                                        <option value="{{ $status }}"
+                                            {{ $p->status === $status ? 'selected' : '' }}>
                                             {{ $status }}
                                         </option>
                                     @endforeach
                                 </select>
                                 <label class="ml-2 text-sm">
-                                    <input type="checkbox" name="hadir" value="1" {{ $p->hadir ? 'checked' : '' }}> Hadir
+                                    <input type="checkbox" name="hadir" value="1"
+                                        {{ $p->hadir ? 'checked' : '' }}> Hadir
                                 </label>
                                 <button type="submit" class="ml-2 px-3 py-1 bg-indigo-600 text-white rounded text-sm">
                                     Simpan

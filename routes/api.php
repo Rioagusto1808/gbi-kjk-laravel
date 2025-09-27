@@ -1,17 +1,15 @@
 <?php
 
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\IbadahController;
+use App\Http\Controllers\JemaatController;
+use App\Http\Controllers\KeluargaController;
+use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\PelayananController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
-    JemaatController,
-    IbadahController,
-    EventController,
-    KeuanganController,
-    BeritaController,
-    FileController,
-    NotifikasiController,
-    KeluargaController,
-    PelayananController
-};
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +19,6 @@ use App\Http\Controllers\{
 
 // Public routes (no auth)
 Route::get('/berita', [BeritaController::class, 'index']);
-Route::get('/berita/{berita}', [BeritaController::class, 'show']);
 Route::get('/ibadah', [IbadahController::class, 'index']);
 Route::get('/ibadah/{ibadah}', [IbadahController::class, 'show']);
 Route::get('/event', [EventController::class, 'index']);

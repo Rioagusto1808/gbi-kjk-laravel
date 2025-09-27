@@ -13,17 +13,18 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             <!-- Renungan Harian -->
-            <div class="bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-xl shadow-lg hover:scale-105 transform transition p-6">
+            <div
+                class="bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-xl shadow-lg hover:scale-105 transform transition p-6">
                 <div class="flex items-center justify-between">
                     <h3 class="text-lg font-semibold">Renungan Harian</h3>
                     <span class="text-3xl">📖</span>
                 </div>
-                @if($renungan)
+                @if ($renungan)
                     <h4 class="mt-3 text-md font-bold">{{ $renungan->judul }}</h4>
                     <p class="text-sm text-gray-100">{{ $renungan->ayat ?? '-' }}</p>
                     <p class="mt-2 text-sm text-gray-200 line-clamp-3">{{ $renungan->isi }}</p>
                     <a href="{{ route('jemaat.renungan.show', $renungan->id) }}"
-                       class="inline-block mt-4 text-sm font-medium bg-white text-purple-700 px-4 py-2 rounded-md shadow hover:bg-gray-100">
+                        class="inline-block mt-4 text-sm font-medium bg-white text-purple-700 px-4 py-2 rounded-md shadow hover:bg-gray-100">
                         Baca Selengkapnya
                     </a>
                 @else
@@ -32,7 +33,8 @@
             </div>
 
             <!-- Jadwal Ibadah -->
-            <div class="bg-gradient-to-br from-indigo-500 to-indigo-700 text-white rounded-xl shadow-lg hover:scale-105 transform transition p-6">
+            <div
+                class="bg-gradient-to-br from-indigo-500 to-indigo-700 text-white rounded-xl shadow-lg hover:scale-105 transform transition p-6">
                 <div class="flex items-center justify-between">
                     <h3 class="text-lg font-semibold">Jadwal Ibadah</h3>
                     <span class="text-3xl">⛪</span>
@@ -48,7 +50,7 @@
                     @endforelse
                 </ul>
                 <a href="{{ route('jemaat.ibadah.index') }}"
-                   class="inline-block mt-4 text-sm font-medium bg-white text-indigo-700 px-4 py-2 rounded-md shadow hover:bg-gray-100">
+                    class="inline-block mt-4 text-sm font-medium bg-white text-indigo-700 px-4 py-2 rounded-md shadow hover:bg-gray-100">
                     Lihat Detail
                 </a>
             </div>

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Renungan;
 use App\Models\Ibadah;
-use Illuminate\Http\Request;
+use App\Models\Renungan;
 
 class DashboardJemaatController extends Controller
 {

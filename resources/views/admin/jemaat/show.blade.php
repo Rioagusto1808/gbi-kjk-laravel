@@ -35,7 +35,8 @@
             </div>
             <div>
                 <p class="text-sm text-gray-500">Status</p>
-                <span class="px-3 py-1 inline-flex text-xs font-semibold rounded-full
+                <span
+                    class="px-3 py-1 inline-flex text-xs font-semibold rounded-full
                     {{ $jemaat->aktif ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' }}">
                     {{ $jemaat->aktif ? 'Aktif' : 'Nonaktif' }}
                 </span>
@@ -44,11 +45,11 @@
 
         <div class="mt-6 flex gap-2">
             <a href="{{ route('jemaat.edit', $jemaat) }}"
-               class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
                 Edit
             </a>
             <a href="{{ route('jemaat.index') }}"
-               class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
+                class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
                 Kembali
             </a>
         </div>

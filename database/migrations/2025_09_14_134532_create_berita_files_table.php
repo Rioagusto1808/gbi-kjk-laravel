@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unique(['berita_id', 'file_id']);
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */

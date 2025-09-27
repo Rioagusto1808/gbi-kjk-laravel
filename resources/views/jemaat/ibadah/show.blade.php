@@ -2,7 +2,7 @@
     <x-slot name="title">Detail Ibadah</x-slot>
 
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow p-6">
-        @if($ibadah)
+        @if ($ibadah)
             <!-- Header -->
             <div class="mb-4">
                 <h2 class="text-2xl font-semibold text-gray-800">{{ $ibadah->jenis }}</h2>
@@ -10,10 +10,10 @@
                 <p class="text-sm text-gray-500 mt-1">
                     <x-heroicon-o-calendar class="w-4 h-4 inline mr-1 text-indigo-500" />
                     {{ $ibadah->tanggal_mulai->format('d M Y H:i') }}
-                    @if($ibadah->tanggal_selesai)
+                    @if ($ibadah->tanggal_selesai)
                         - {{ $ibadah->tanggal_selesai->format('H:i') }}
                     @endif
-                    | 
+                    |
                     <x-heroicon-o-map-pin class="w-4 h-4 inline mr-1 text-pink-500" />
                     {{ $ibadah->lokasi ?? '-' }}
                 </p>
@@ -39,7 +39,7 @@
             </div>
 
             <!-- Deskripsi -->
-            @if($ibadah->deskripsi)
+            @if ($ibadah->deskripsi)
                 <div class="mt-6">
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">Deskripsi</h3>
                     <p class="text-gray-700 leading-relaxed">{{ $ibadah->deskripsi }}</p>

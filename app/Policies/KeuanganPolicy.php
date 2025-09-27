@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\KeuanganTransaksi;
+use App\Models\User;
 
 class KeuanganPolicy
 {
@@ -27,4 +27,3 @@ class KeuanganPolicy
         return $user->hasRole('superadmin');
     }
 }
-

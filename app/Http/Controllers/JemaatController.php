@@ -16,7 +16,7 @@ class JemaatController extends Controller
 
         if ($request->filled('search')) {
             $query->where('name', 'like', "%{$request->search}%")
-                  ->orWhere('no_hp', 'like', "%{$request->search}%");
+                ->orWhere('no_hp', 'like', "%{$request->search}%");
         }
 
         $jemaat = $query->oldest()->paginate(10);
@@ -27,7 +27,8 @@ class JemaatController extends Controller
     public function create()
     {
         $this->authorize('create', Jemaat::class);
-        return view('jemaat.create');
+
+        return view('admin.jemaat.create');
     }
 
     public function store(JemaatRequest $request)
@@ -44,14 +45,14 @@ class JemaatController extends Controller
     {
         $this->authorize('view', $jemaat);
 
-        return view('jemaat.show', compact('jemaat'));
+        return view('admin.jemaat.show', compact('jemaat'));
     }
 
     public function edit(Jemaat $jemaat)
     {
         $this->authorize('update', $jemaat);
 
-        return view('jemaat.edit', compact('jemaat'));
+        return view('admin.jemaat.edit', compact('jemaat'));
     }
 
     public function update(JemaatRequest $request, Jemaat $jemaat)
@@ -77,7 +78,8 @@ class JemaatController extends Controller
     public function deleted()
     {
         $jemaat = Jemaat::onlyTrashed()->paginate(10);
-        return view('jemaat.deleted', compact('jemaat'));
+
+        return view('admin.jemaat.deleted', compact('jemaat'));
     }
 
     public function restore($id)

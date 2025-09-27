@@ -19,12 +19,13 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-                @foreach($peserta as $p)
+                @foreach ($peserta as $p)
                     <tr>
                         <td class="px-6 py-4">{{ $p->jemaat->name ?? '-' }}</td>
                         <td class="px-6 py-4">
-                            <span class="px-2 py-1 rounded-full text-xs font-medium
-                                @if($p->status === 'Daftar') bg-yellow-100 text-yellow-700
+                            <span
+                                class="px-2 py-1 rounded-full text-xs font-medium
+                                @if ($p->status === 'Daftar') bg-yellow-100 text-yellow-700
                                 @elseif($p->status === 'Dikonfirmasi') bg-green-100 text-green-700
                                 @elseif($p->status === 'Bayar') bg-blue-100 text-blue-700
                                 @elseif($p->status === 'Batal') bg-red-100 text-red-700
@@ -36,16 +37,21 @@
                             {{ $p->hadir ? '✅' : '-' }}
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <form action="{{ route('event.peserta.update', $p->id) }}" method="POST" class="inline-flex items-center gap-2">
+                            <form action="{{ route('event.peserta.update', $p->id) }}" method="POST"
+                                class="inline-flex items-center gap-2">
                                 @csrf
                                 @method('PATCH')
                                 <select name="status" class="border-gray-300 rounded text-sm">
-                                    <option value="Daftar" {{ $p->status === 'Daftar' ? 'selected' : '' }}>Daftar</option>
-                                    <option value="Dikonfirmasi" {{ $p->status === 'Dikonfirmasi' ? 'selected' : '' }}>Dikonfirmasi</option>
+                                    <option value="Daftar" {{ $p->status === 'Daftar' ? 'selected' : '' }}>Daftar
+                                    </option>
+                                    <option value="Dikonfirmasi" {{ $p->status === 'Dikonfirmasi' ? 'selected' : '' }}>
+                                        Dikonfirmasi</option>
                                     <option value="Bayar" {{ $p->status === 'Bayar' ? 'selected' : '' }}>Bayar</option>
-                                    <option value="Batal" {{ $p->status === 'Batal' ? 'selected' : '' }}>Batal</option>
+                                    <option value="Batal" {{ $p->status === 'Batal' ? 'selected' : '' }}>Batal
+                                    </option>
                                 </select>
-                                <input type="checkbox" name="hadir" value="1" {{ $p->hadir ? 'checked' : '' }} /> Hadir
+                                <input type="checkbox" name="hadir" value="1"
+                                    {{ $p->hadir ? 'checked' : '' }} /> Hadir
                                 <button type="submit"
                                     class="px-3 py-1 bg-indigo-600 text-white rounded hover:bg-indigo-700 text-xs">
                                     Update

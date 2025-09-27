@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RolePermissionSeeder extends Seeder
 {
@@ -38,8 +38,8 @@ class RolePermissionSeeder extends Seeder
 
         // Role
         $superadmin = Role::firstOrCreate(['name' => 'superadmin']);
-        $admin      = Role::firstOrCreate(['name' => 'admin']);
-        $jemaat     = Role::firstOrCreate(['name' => 'jemaat']);
+        $admin = Role::firstOrCreate(['name' => 'admin']);
+        $jemaat = Role::firstOrCreate(['name' => 'jemaat']);
 
         // Assign permission ke role
         $superadmin->givePermissionTo(Permission::all());
@@ -63,4 +63,3 @@ class RolePermissionSeeder extends Seeder
         ]);
     }
 }
-

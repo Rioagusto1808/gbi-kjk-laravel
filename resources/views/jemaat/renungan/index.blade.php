@@ -5,9 +5,9 @@
         <h2 class="text-2xl font-merriweather font-semibold text-gray-800">Renungan Harian</h2>
     </div>
 
-    @if($renungan->count())
+    @if ($renungan->count())
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach($renungan as $r)
+            @foreach ($renungan as $r)
                 <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-5 flex flex-col justify-between">
                     <div>
                         <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ $r->judul }}</h3>
@@ -18,7 +18,7 @@
                     <div class="mt-4 flex justify-between items-center">
                         <p class="text-xs text-gray-500">Oleh: {{ $r->penulis ?? '-' }}</p>
                         <a href="{{ route('jemaat.renungan.show', $r->id) }}"
-                           class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-900 text-sm font-medium">
+                            class="inline-flex items-center gap-1 text-indigo-600 hover:text-indigo-900 text-sm font-medium">
                             <x-heroicon-o-eye class="w-4 h-4" /> Baca
                         </a>
                     </div>

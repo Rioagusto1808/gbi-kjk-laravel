@@ -15,9 +15,9 @@
                     <p class="mt-2 text-3xl font-bold text-indigo-600">{{ \App\Models\Jemaat::count() }}</p>
                 </div>
                 <div class="bg-indigo-100 text-indigo-600 rounded-full p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                         viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2h5m6-8a4 4 0 100-8 4 4 0 000 8z"/>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17 20h5v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2h5m6-8a4 4 0 100-8 4 4 0 000 8z" />
                     </svg>
                 </div>
             </div>
@@ -31,10 +31,9 @@
                     <p class="mt-2 text-3xl font-bold text-purple-600">{{ \App\Models\Event::count() }}</p>
                 </div>
                 <div class="bg-purple-100 text-purple-600 rounded-full p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                         viewBox="0 0 24 24">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </div>
             </div>
@@ -48,10 +47,9 @@
                     <p class="mt-2 text-3xl font-bold text-green-600">{{ \App\Models\Ibadah::count() }}</p>
                 </div>
                 <div class="bg-green-100 text-green-600 rounded-full p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                         viewBox="0 0 24 24">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M3 10h11M9 21V3M17 16l4-4m0 0l-4-4m4 4H11"/>
+                            d="M3 10h11M9 21V3M17 16l4-4m0 0l-4-4m4 4H11" />
                     </svg>
                 </div>
             </div>
@@ -67,14 +65,12 @@
                     </p>
                 </div>
                 <div class="bg-yellow-100 text-yellow-600 rounded-full p-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                         viewBox="0 0 24 24">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M12 8c-1.1 0-2 .9-2 2s.9 2 2 2m0-6a6 6 0 016 6c0 3.31-2.69 6-6 6m0-18v2m0 16v2m8-10h2m-18 0H2"/>
+                            d="M12 8c-1.1 0-2 .9-2 2s.9 2 2 2m0-6a6 6 0 016 6c0 3.31-2.69 6-6 6m0-18v2m0 16v2m8-10h2m-18 0H2" />
                     </svg>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-

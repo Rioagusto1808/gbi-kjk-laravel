@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Renungan;
 use App\Http\Requests\RenunganRequest;
+use App\Models\Renungan;
 
 class RenunganController extends Controller
 {
@@ -22,6 +22,7 @@ class RenunganController extends Controller
     public function jemaatShow(Renungan $renungan)
     {
         abort_if($renungan->status !== 'publish', 403);
+
         return view('jemaat.renungan.show', compact('renungan'));
     }
 
@@ -31,6 +32,7 @@ class RenunganController extends Controller
     public function index()
     {
         $renungan = Renungan::orderBy('created_at', 'desc')->paginate(10);
+
         return view('admin.renungan.index', compact('renungan'));
     }
 
@@ -42,6 +44,7 @@ class RenunganController extends Controller
     public function store(RenunganRequest $request)
     {
         Renungan::create($request->validated());
+
         return redirect()->route('renungan.index')
             ->with('success', 'Renungan berhasil ditambahkan.');
     }
@@ -54,6 +57,7 @@ class RenunganController extends Controller
     public function update(RenunganRequest $request, Renungan $renungan)
     {
         $renungan->update($request->validated());
+
         return redirect()->route('renungan.index')
             ->with('success', 'Renungan berhasil diperbarui.');
     }
@@ -61,6 +65,7 @@ class RenunganController extends Controller
     public function destroy(Renungan $renungan)
     {
         $renungan->delete();
+
         return redirect()->route('renungan.index')
             ->with('success', 'Renungan berhasil dihapus.');
     }
