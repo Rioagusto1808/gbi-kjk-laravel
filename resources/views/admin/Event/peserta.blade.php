@@ -15,7 +15,7 @@
             <tbody>
                 @foreach ($peserta as $index => $p)
                     <tr class="border-t">
-                        <td class="px-4 py-2">{{ $peserta->firstItem() + $index}}</td>
+                        <td class="px-4 py-2">{{ $peserta->firstItem() + $index }}</td>
                         <td class="px-4 py-2">{{ $p->jemaat->name ?? '-' }}</td>
                         <td class="px-4 py-2">{{ $p->status }}</td>
                         <td class="px-4 py-2">{{ $p->hadir ? '✅' : '❌' }}</td>

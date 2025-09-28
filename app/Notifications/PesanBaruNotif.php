@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
 class PesanBaruNotif extends Notification
@@ -35,11 +34,11 @@ class PesanBaruNotif extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'nama'  => $this->data['nama'],
+            'nama' => $this->data['nama'],
             'email' => $this->data['email'],
             'pesan' => $this->data['pesan'],
-            'time'  => now()->toDateTimeString(),
-            'url'   => route('kontak.show', $this->data['id']),
+            'time' => now()->toDateTimeString(),
+            'url' => route('kontak.show', $this->data['id']),
         ];
     }
 }

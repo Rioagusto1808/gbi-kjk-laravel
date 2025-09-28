@@ -8,31 +8,30 @@ use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
-
     public function indexPublic()
-{
-    $berita = Berita::with('files', 'author')
-        ->whereNotNull('published_at')
-        ->orderByDesc('published_at')
-        ->paginate(16);
+    {
+        $berita = Berita::with('files', 'author')
+            ->whereNotNull('published_at')
+            ->orderByDesc('published_at')
+            ->paginate(16);
 
-    return view('landing.berita.index', compact('berita'));
-}
+        return view('landing.berita.index', compact('berita'));
+    }
 
-public function show(Berita $berita)
-{
-    $berita->load('files', 'author');
+    public function show(Berita $berita)
+    {
+        $berita->load('files', 'author');
 
-    // Ambil berita lain selain berita yang sedang dibuka
-    $beritaLain = Berita::with('files')
-        ->where('id', '!=', $berita->id)
-        ->whereNotNull('published_at')
-        ->orderByDesc('published_at')
-        ->limit(5)
-        ->get();
+        // Ambil berita lain selain berita yang sedang dibuka
+        $beritaLain = Berita::with('files')
+            ->where('id', '!=', $berita->id)
+            ->whereNotNull('published_at')
+            ->orderByDesc('published_at')
+            ->limit(5)
+            ->get();
 
-    return view('landing.berita.show', compact('berita', 'beritaLain'));
-}
+        return view('landing.berita.show', compact('berita', 'beritaLain'));
+    }
 
     public function index()
     {
@@ -122,5 +121,4 @@ public function show(Berita $berita)
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
     }
-
 }

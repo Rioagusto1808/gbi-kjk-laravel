@@ -35,7 +35,7 @@ Route::get('/berita', [BeritaController::class, 'indexPublic'])
 Route::get('/berita/{berita}', [BeritaController::class, 'show'])
     ->name('berita.public.show');
 
-    // Renungan publik
+// Renungan publik
 Route::get('/renungan', [RenunganController::class, 'indexPublic'])->name('renungan.public.index');
 Route::get('/renungan/{renungan}', [RenunganController::class, 'showPublic'])->name('renungan.public.show');
 
@@ -110,9 +110,10 @@ Route::middleware(['auth', 'check_status_user', 'verified'])->group(function () 
         Route::resource('admin/jemaat', JemaatController::class);
         Route::get('/jemaat/deleted', [JemaatController::class, 'deleted'])
             ->name('jemaat.deleted');
-        Route::get('/jemaat/restore', [JemaatController::class, 'restore'])
+        Route::patch('/jemaat/{id}/restore', [JemaatController::class, 'restore'])
             ->name('jemaat.restore');
-        Route::get('/jemaat/force-delete', [JemaatController::class, 'forceDelete'])
+
+        Route::delete('/jemaat/{id}/force-delete', [JemaatController::class, 'forceDelete'])
             ->name('jemaat.force-delete');
         Route::resource('admin/ibadah', IbadahController::class)->except(['show']);
         Route::resource('admin/event', EventController::class)->except(['show']);
@@ -137,7 +138,7 @@ Route::middleware(['auth', 'check_status_user', 'verified'])->group(function () 
         Route::get('/kontak/{kontak}', [KontakKamiController::class, 'show'])->name('kontak.show');
         Route::post('/kontak/{kontak}/reply', [KontakKamiController::class, 'reply'])->name('kontak.reply');
         Route::get('/keuangan/laporan/pdf', [KeuanganController::class, 'laporan'])
-                ->name('keuangan.laporan.pdf');
+            ->name('keuangan.laporan.pdf');
 
         // Tim pelayanan tetap di bawah ibadah
         Route::get('admin/ibadah/history', [IbadahController::class, 'history'])->name('ibadah.history');

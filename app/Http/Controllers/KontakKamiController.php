@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KontakKamiRequest;
-use App\Mail\PesanBaruMail;
 use App\Models\KontakKami;
 use App\Models\User;
 use App\Notifications\PesanBaruNotif;
@@ -17,18 +16,18 @@ class KontakKamiController extends Controller
     {
         $data = $request->validated();
         $kontak = KontakKami::create($data);
-        
+
         $admin = User::role('superadmin')->first();
 
         if ($admin) {
-        $notifData = [
-            'id'    => $kontak->id,
-            'nama'  => $kontak->nama,
-            'email' => $kontak->email,
-            'pesan' => $kontak->pesan,
-        ];
-        $admin->notify(new PesanBaruNotif($notifData));
-    }
+            $notifData = [
+                'id' => $kontak->id,
+                'nama' => $kontak->nama,
+                'email' => $kontak->email,
+                'pesan' => $kontak->pesan,
+            ];
+            $admin->notify(new PesanBaruNotif($notifData));
+        }
 
         return back()->with('success', 'Pesan berhasil dikirim. Kami akan segera merespon.');
     }
@@ -37,6 +36,7 @@ class KontakKamiController extends Controller
     public function index()
     {
         $kontak = KontakKami::latest()->paginate(10);
+
         return view('admin.kontak.index', compact('kontak'));
     }
 

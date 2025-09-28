@@ -17,9 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PelayananSeeder::class);
 
         $super = User::firstOrCreate(
-            ['email' => 'rioagustor18r@gmail.com'],
-            ['name' => 'Rio Agusto', 'password' => bcrypt('123')],
-            ['email_verified_at' => now()],
+            ['email' => 'rioagustor18@gmail.com',
+                'name' => 'Rio Agusto', 'password' => bcrypt('123'),
+                'email_verified_at' => now(),
+            ]
         );
 
         $super->assignRole('superadmin');

@@ -13,7 +13,9 @@
     <meta name="keywords" content="GBI KJK, Gereja, Ibadah, Kotabumi, Lampung, Renungan, Event, Berita">
     <meta name="author" content="GBI KJK">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -166,9 +168,13 @@
 
     @stack('scripts')
     <script>
-        // Toggle mobile menu
         document.getElementById('menu-toggle').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        AOS.init({
+            duration: 1000, // durasi animasi (ms)
+            once: false, // animasi hanya jalan sekali
         });
     </script>
 </body>

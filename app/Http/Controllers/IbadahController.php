@@ -75,8 +75,8 @@ class IbadahController extends Controller
         $users = User::role('jemaat')->get();
 
         foreach ($users as $user) {
-        $user->notify(new IbadahCreatedNotif($ibadah));
-    }
+            $user->notify(new IbadahCreatedNotif($ibadah));
+        }
 
         return redirect()->route('ibadah.index')->with('success', 'Ibadah berhasil ditambahkan & email notifikasi sudah dikirim.');
     }

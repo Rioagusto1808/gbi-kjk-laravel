@@ -4,11 +4,10 @@
     <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
         <!-- Header -->
         @if ($event->image)
-            <img src="{{ Storage::url($event->image) }}" 
-                 alt="{{ $event->nama_event }}" 
-                 class="w-full h-56 object-cover">
+            <img src="{{ Storage::url($event->image) }}" alt="{{ $event->nama_event }}" class="w-full h-56 object-cover">
         @else
-            <div class="w-full h-56 bg-gradient-to-r from-red-800 to-red-700 flex items-center justify-center text-white text-2xl font-bold">
+            <div
+                class="w-full h-56 bg-gradient-to-r from-red-800 to-red-700 flex items-center justify-center text-white text-2xl font-bold">
                 {{ strtoupper(Str::limit($event->nama_event, 20)) }}
             </div>
         @endif
@@ -35,7 +34,8 @@
             <!-- Tombol -->
             <div class="mt-8">
                 @php
-                    $sudahDaftar = $event->peserta()
+                    $sudahDaftar = $event
+                        ->peserta()
                         ->where('jemaat_id', auth()->user()->jemaat->id ?? null)
                         ->exists();
                 @endphp
@@ -48,7 +48,7 @@
                     <form action="{{ route('event.daftar', $event->id) }}" method="POST">
                         @csrf
                         <button type="submit"
-                                class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold transition">
+                            class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold transition">
                             Daftar Event
                         </button>
                     </form>

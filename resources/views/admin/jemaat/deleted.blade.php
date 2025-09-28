@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="title">Recycle Bin Jemaat</x-slot>
-
+    <x-message />
     <!-- Header -->
     <div class="flex justify-between items-center mb-6 py-4">
         <h2 class="text-2xl font-semibold text-gray-800">Recycle Bin Jemaat</h2>
@@ -8,7 +8,6 @@
             ← Kembali ke Daftar Jemaat
         </a>
     </div>
-
     <!-- Table -->
     <div class="overflow-x-auto bg-white shadow rounded-lg">
         <table class="min-w-full divide-y divide-gray-200 text-sm">
@@ -32,6 +31,7 @@
                             <!-- Restore -->
                             <form action="{{ route('jemaat.restore', $j->id) }}" method="POST" class="inline-block">
                                 @csrf
+                                @method('PATCH')
                                 <button
                                     class="inline-flex items-center gap-1 text-green-600 hover:text-green-900 font-medium">
                                     <x-heroicon-o-arrow-path class="w-4 h-4" />

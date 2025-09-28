@@ -10,7 +10,6 @@ class JemaatController extends Controller
 {
     public function index(Request $request)
     {
-        $this->authorize('viewAny', Jemaat::class);
 
         $query = Jemaat::with(['foto', 'keluarga', 'pelayanan']);
 
@@ -26,14 +25,12 @@ class JemaatController extends Controller
 
     public function create()
     {
-        $this->authorize('create', Jemaat::class);
 
         return view('admin.jemaat.create');
     }
 
     public function store(JemaatRequest $request)
     {
-        $this->authorize('create', Jemaat::class);
 
         Jemaat::create($request->validated());
 
@@ -43,21 +40,18 @@ class JemaatController extends Controller
 
     public function show(Jemaat $jemaat)
     {
-        $this->authorize('view', $jemaat);
 
         return view('admin.jemaat.show', compact('jemaat'));
     }
 
     public function edit(Jemaat $jemaat)
     {
-        $this->authorize('update', $jemaat);
 
         return view('admin.jemaat.edit', compact('jemaat'));
     }
 
     public function update(JemaatRequest $request, Jemaat $jemaat)
     {
-        $this->authorize('update', $jemaat);
 
         $jemaat->update($request->validated());
 
@@ -67,7 +61,6 @@ class JemaatController extends Controller
 
     public function destroy(Jemaat $jemaat)
     {
-        $this->authorize('delete', $jemaat);
 
         $jemaat->delete();
 
@@ -87,7 +80,7 @@ class JemaatController extends Controller
         $jemaat = Jemaat::withTrashed()->findOrFail($id);
         $jemaat->restore();
 
-        return redirect()->route('jemaat.deleted')->with('success', 'Jemaat berhasil dipulihkan.');
+        return redirect()->route('jemaat.index')->with('success', 'Jemaat berhasil dipulihkan.');
     }
 
     public function forceDelete($id)

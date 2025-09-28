@@ -44,7 +44,8 @@ class Berita extends Model
     {
         return $this->files()->wherePivot('tipe', 'lampiran');
     }
-public function getRouteKeyName()
+
+    public function getRouteKeyName()
     {
         return 'id'; // atau 'slug' kalau kamu punya kolom slug
     }

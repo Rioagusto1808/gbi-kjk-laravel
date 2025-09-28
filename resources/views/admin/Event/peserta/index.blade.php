@@ -48,7 +48,8 @@
                                     </option>
                                     <option value="Dikonfirmasi" {{ $p->status === 'Dikonfirmasi' ? 'selected' : '' }}>
                                         Dikonfirmasi</option>
-                                    <option value="Bayar" {{ $p->status === 'Bayar' ? 'selected' : '' }}>Bayar</option>
+                                    <option value="Bayar" {{ $p->status === 'Bayar' ? 'selected' : '' }}>Bayar
+                                    </option>
                                     <option value="Batal" {{ $p->status === 'Batal' ? 'selected' : '' }}>Batal
                                     </option>
                                 </select>

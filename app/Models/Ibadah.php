@@ -54,7 +54,7 @@ class Ibadah extends Model
     {
         return $this->hasMany(pelayananIbadah::class, 'ibadah_id');
     }
-    
+
     protected $appends = ['status_dynamic'];
 
     public function getStatusDynamicAttribute()
@@ -75,5 +75,4 @@ class Ibadah extends Model
 
         return $this->status; // fallback ke kolom status DB
     }
-
 }

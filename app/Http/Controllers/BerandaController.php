@@ -14,8 +14,8 @@ class BerandaController extends Controller
     public function index()
     {
         $carousels = Carousel::where('aktif', 1)
-        ->orderBy('urutan', 'asc')
-        ->get();
+            ->orderBy('urutan', 'asc')
+            ->get();
         // ambil berita terbaru + relasi file (gambar)
         $berita = Berita::with('files')->latest()->take(6)->get();
 

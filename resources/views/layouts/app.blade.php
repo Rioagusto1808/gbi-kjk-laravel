@@ -159,108 +159,96 @@
                     <nav class="space-y-4 text-sm font-medium">
                         @hasanyrole('superadmin')
                             <a href="{{ route('admin.dashboard') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('admin.dashboard') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('admin.dashboard')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-home class="w-5 h-5" />
                                 Beranda
                             </a>
                             <a href="{{ route('jemaat.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.index') ? 'text-orange-600 font-semibold' : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-users class="w-5 h-5" />
                                 Jemaat
                             </a>
                             <a href="{{ route('ibadah.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('ibadah.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('ibadah.index') ? 'text-orange-600 font-semibold' : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-calendar class="w-5 h-5" />
                                 Jadwal Ibadah
                             </a>
                             <a href="{{ route('renungan.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('renungan.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('renungan.index')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-book-open class="w-5 h-5" />
                                 Renungan
                             </a>
                             <a href="{{ route('pelayanan.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('pelayanan.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('pelayanan.index')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-hand-raised class="w-5 h-5" />
                                 Kategori Pelayanan
                             </a>
                             <a href="{{ route('berita.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('berita.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('berita.index') ? 'text-orange-600 font-semibold' : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-newspaper class="w-5 h-5" />
                                 Berita
                                 <a href="{{ route('galeri.index') }}"
-                                    class="flex items-center gap-2 {{ request()->routeIs('galeri.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                    class="flex items-center gap-2 {{ request()->routeIs('galeri.index') ? 'text-orange-600 font-semibold' : 'text-gray-700 hover:text-orange-600' }}">
                                     <x-heroicon-o-rectangle-stack class="w-5 h-5" />
                                     Galeri
                                 </a>
                             </a>
                             <a href="{{ route('event.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('event.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('event.index') ? 'text-orange-600 font-semibold' : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-sparkles class="w-5 h-5" />
                                 Event
                             </a>
-                            <!-- <a href="#" class="flex items-center gap-2 {{ request()->routeIs('admin.dashboard') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
-                                    <x-heroicon-o-banknotes class="w-5 h-5" />
-                                    Keuangan
-                                </a> -->
+                            <!-- <a href="#" class="flex items-center gap-2 {{ request()->routeIs('admin.dashboard')
+                                ? 'text-orange-600 font-semibold'
+                                : 'text-gray-700 hover:text-orange-600' }}">
+                                            <x-heroicon-o-banknotes class="w-5 h-5" />
+                                            Keuangan
+                                        </a> -->
                             <a href="{{ route('kontak.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('kontak.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('kontak.index') ? 'text-orange-600 font-semibold' : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-envelope class="w-5 h-5" />
                                 Pesan
                             </a>
                             <a href="{{ route('carousel.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('carousel.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('carousel.index')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-photo class="w-5 h-5" />
                                 Carousel
                             </a>
                         @endhasanyrole
                         @role('jemaat')
                             <a href="{{ route('jemaat.dashboard') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.dashboard') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.dashboard')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-home class="w-5 h-5" />
                                 Beranda
                             </a>
                             <a href="{{ route('jemaat.tim-pelayanan.overview') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.tim-pelayanan.overview') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.tim-pelayanan.overview')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-calendar class="w-5 h-5" />
                                 Tim Pelayanan
                             </a>
                             <a href="{{ route('jemaat.renungan.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.renungan.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.renungan.index')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-book-open class="w-5 h-5" />
                                 Renungan
                             </a>
                             <a href="{{ route('jemaat.event.index') }}"
-                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.event.index') 
-             ? 'text-orange-600 font-semibold' 
-             : 'text-gray-700 hover:text-orange-600' }}">
+                                class="flex items-center gap-2 {{ request()->routeIs('jemaat.event.index')
+                                    ? 'text-orange-600 font-semibold'
+                                    : 'text-gray-700 hover:text-orange-600' }}">
                                 <x-heroicon-o-sparkles class="w-5 h-5" />
                                 Event
                             </a>

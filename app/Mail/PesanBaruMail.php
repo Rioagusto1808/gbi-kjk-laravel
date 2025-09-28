@@ -3,10 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class PesanBaruMail extends Mailable
@@ -23,7 +20,7 @@ class PesanBaruMail extends Mailable
     public function build()
     {
         return $this->subject('Pesan Baru dari Form Kontak')
-                    ->markdown('emails.kontak')
-                    ->with('data', $this->data);
+            ->markdown('emails.kontak')
+            ->with('data', $this->data);
     }
 }
