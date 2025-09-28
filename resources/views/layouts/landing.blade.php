@@ -28,11 +28,16 @@
 
             {{-- Menu Desktop --}}
             <nav class="hidden md:flex space-x-6 font-medium text-gray-700">
-                <a href="{{ route('home') }}" class="hover:text-red-700">Beranda</a>
-                <a href="{{ route('berita.public.index') }}" class="hover:text-red-700">Berita</a>
-                <a href="{{ route('renungan.public.index') }}" class="hover:text-red-700">Renungan</a>
-                <a href="{{ route('jadwal.public.index') }}" class="hover:text-red-700">Jadwal</a>
-                <a href="{{ route('event.public.index') }}" class="hover:text-red-700">Event</a>
+                <a href="{{ route('home') }}"
+                    class="{{ request()->routeIs('home') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Beranda</a>
+                <a href="{{ route('berita.public.index') }}"
+                    class="{{ request()->routeIs('berita.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Berita</a>
+                <a href="{{ route('renungan.public.index') }}"
+                    class="{{ request()->routeIs('renungan.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Renungan</a>
+                <a href="{{ route('jadwal.public.index') }}"
+                    class="{{ request()->routeIs('jadwal.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Jadwal</a>
+                <a href="{{ route('event.public.index') }}"
+                    class="{{ request()->routeIs('event.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Event</a>
             </nav>
 
             {{-- Right side --}}
@@ -65,11 +70,16 @@
         {{-- Mobile menu --}}
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
             <nav class="flex flex-col space-y-2 p-4">
-                <a href="{{ route('home') }}" class="hover:text-red-700">Beranda</a>
-                <a href="{{ route('berita.public.index') }}" class="hover:text-red-700">Berita</a>
-                <a href="{{ route('renungan.public.index') }}" class="hover:text-red-700">Renungan</a>
-                <a href="{{ route('jadwal.public.index') }}" class="hover:text-red-700">Jadwal</a>
-                <a href="{{ route('event.public.index') }}" class="hover:text-red-700">Event</a>
+                <a href="{{ route('home') }}"
+                    class="{{ request()->routeIs('home') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Beranda</a>
+                <a href="{{ route('berita.public.index') }}"
+                    class="{{ request()->routeIs('berita.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Berita</a>
+                <a href="{{ route('renungan.public.index') }}"
+                    class="{{ request()->routeIs('renungan.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Renungan</a>
+                <a href="{{ route('jadwal.public.index') }}"
+                    class="{{ request()->routeIs('jadwal.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Jadwal</a>
+                <a href="{{ route('event.public.index') }}"
+                    class="{{ request()->routeIs('event.public.index') ? 'text-red-700 font-bold' : 'text-gray-700 hover:text-red-700' }}">Event</a>
                 @guest
                     <div class="flex">
                         <a href="{{ route('login') }}"
@@ -98,7 +108,7 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-gradient-to-r from-red-800 to-red-700 text-gray-300 mt-10">
+    <footer class="bg-gradient-to-r from-red-800 to-red-700 text-gray-300">
         <div class="container mx-auto px-6 py-12 grid md:grid-cols-3 gap-10">
 
             <div>

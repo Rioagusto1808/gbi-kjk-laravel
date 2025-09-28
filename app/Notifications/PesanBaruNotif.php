@@ -39,6 +39,7 @@ class PesanBaruNotif extends Notification
             'email' => $this->data['email'],
             'pesan' => $this->data['pesan'],
             'time'  => now()->toDateTimeString(),
+            'url'   => route('kontak.show', $this->data['id']),
         ];
     }
 }

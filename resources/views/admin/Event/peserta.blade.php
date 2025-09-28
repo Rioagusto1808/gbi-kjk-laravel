@@ -5,6 +5,7 @@
         <table class="w-full text-sm border">
             <thead class="bg-gray-100">
                 <tr>
+                    <th class="px-4 py-2">No</th>
                     <th class="px-4 py-2">Nama Jemaat</th>
                     <th class="px-4 py-2">Status</th>
                     <th class="px-4 py-2">Hadir</th>
@@ -12,8 +13,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($peserta as $p)
+                @foreach ($peserta as $index => $p)
                     <tr class="border-t">
+                        <td class="px-4 py-2">{{ $peserta->firstItem() + $index}}</td>
                         <td class="px-4 py-2">{{ $p->jemaat->name ?? '-' }}</td>
                         <td class="px-4 py-2">{{ $p->status }}</td>
                         <td class="px-4 py-2">{{ $p->hadir ? '✅' : '❌' }}</td>

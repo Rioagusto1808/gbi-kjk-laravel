@@ -23,29 +23,38 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
+{
+    try {
         $request->authenticate();
-
-        $request->session()->regenerate();
-
-        $user = Auth::user();
-
-        // Cek apakah jemaat masih aktif
-        if ($user->jemaat && ! $user->jemaat->aktif) {
-            Auth::logout();
-
-            return redirect()->route('login')->withErrors([
-                'email' => 'Akun Anda tidak aktif, silakan hubungi admin.',
-            ]);
-        }
-
-        // Redirect berdasarkan role
-        if ($user->hasRole('superadmin|admin')) {
-            return redirect()->route('admin.dashboard');
-        } else {
-            return redirect()->route('jemaat.dashboard');
-        }
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return back()->withErrors([
+            'email' => 'Email atau kata sandi salah.',
+        ])->withInput($request->only('email'));
     }
+
+    $request->session()->regenerate();
+
+    $user = Auth::user();
+
+    // Cek apakah jemaat masih aktif
+    if ($user->jemaat && ! $user->jemaat->aktif) {
+        Auth::logout();
+
+        return redirect()->route('login')->withErrors([
+            'email' => 'Akun Anda tidak aktif, silakan hubungi admin.',
+        ]);
+    }
+
+    // Redirect berdasarkan role + kasih pesan sukses
+    if ($user->hasRole('superadmin')) {
+        return redirect()->route('admin.dashboard')
+                         ->with('success', 'Selamat datang kembali, ' . $user->name . '!');
+    } else {
+        return redirect()->route('jemaat.dashboard')
+                         ->with('success', 'Login berhasil, selamat beribadah ' . $user->name . '!');
+    }
+}
+
 
     /**
      * Destroy an authenticated session.

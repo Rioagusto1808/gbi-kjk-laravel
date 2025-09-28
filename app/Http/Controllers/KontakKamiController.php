@@ -16,14 +16,19 @@ class KontakKamiController extends Controller
     public function store(KontakKamiRequest $request)
     {
         $data = $request->validated();
-        KontakKami::create($data);
+        $kontak = KontakKami::create($data);
         
-        $admin = User::where('email', 'admin@gmail.com')->first();
+        $admin = User::role('superadmin')->first();
 
         if ($admin) {
-            $admin->notify(new \App\Notifications\PesanBaruNotif($data));
-        }
-
+        $notifData = [
+            'id'    => $kontak->id,
+            'nama'  => $kontak->nama,
+            'email' => $kontak->email,
+            'pesan' => $kontak->pesan,
+        ];
+        $admin->notify(new PesanBaruNotif($notifData));
+    }
 
         return back()->with('success', 'Pesan berhasil dikirim. Kami akan segera merespon.');
     }

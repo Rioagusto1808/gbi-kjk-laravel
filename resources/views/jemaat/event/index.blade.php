@@ -8,37 +8,37 @@
     @if ($event->count())
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ($event as $e)
-                <div class="bg-white rounded-lg shadow p-5 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800">{{ $e->nama_event }}</h3>
-                        <p class="text-sm text-gray-600 mb-2">{{ Str::limit($e->deskripsi, 80) }}</p>
+               <div class="p-5 bg-white flex flex-col h-full">
+    <!-- Konten Atas -->
+    <div class="flex-grow">
+        <h3 class="text-lg font-bold text-gray-800 mb-1">{{ $e->nama_event }}</h3>
+        <p class="text-sm text-gray-600 mb-3">{{ Str::limit($e->deskripsi, 80) }}</p>
 
-                        <p class="text-sm text-gray-700">
-                            <x-heroicon-o-calendar class="w-4 h-4 inline mr-1 text-indigo-500" />
-                            {{ $e->tanggal_mulai->format('d M Y H:i') }}
-                        </p>
-                        <p class="text-sm text-gray-700">
-                            <x-heroicon-o-map-pin class="w-4 h-4 inline mr-1 text-pink-500" />
-                            {{ $e->lokasi ?? '-' }}
-                        </p>
-                    </div>
+        <p class="text-sm text-gray-700 mb-1">
+            <x-heroicon-o-calendar class="w-4 h-4 inline mr-1 text-red-700" />
+            {{ $e->tanggal_mulai->format('d M Y H:i') }}
+        </p>
+        <p class="text-sm text-gray-700">
+            <x-heroicon-o-map-pin class="w-4 h-4 inline mr-1 text-red-700" />
+            {{ $e->lokasi ?? '-' }}
+        </p>
+    </div>
 
-                    <div class="mt-4 flex justify-between items-center">
-                        <a href="{{ route('jemaat.event.show', $e->id) }}" class="text-indigo-600 hover:underline">Lihat
-                            Detail</a>
+    <!-- Footer -->
+    <div class="mt-4 flex justify-between items-center">
+        <a href="{{ route('jemaat.event.show', $e->id) }}"
+           class="px-4 py-2 bg-red-700 text-white text-sm rounded-md shadow hover:bg-red-800 transition">
+            Lihat Detail
+        </a>
 
-                        @php
-                            $sudahDaftar = $e
-                                ->peserta()
-                                ->where('jemaat_id', auth()->user()->jemaat->id ?? null)
-                                ->exists();
-                        @endphp
+        @if ($e->peserta()->where('jemaat_id', auth()->user()->jemaat->id ?? null)->exists())
+            <span class="px-3 py-1 bg-green-600 text-white rounded-full text-xs font-semibold">
+                ✅ Terdaftar
+            </span>
+        @endif
+    </div>
+</div>
 
-                        @if ($sudahDaftar)
-                            <span class="px-3 py-1 bg-gray-400 text-white rounded-md text-xs">✅ Terdaftar</span>
-                        @endif
-                    </div>
-                </div>
             @endforeach
         </div>
 

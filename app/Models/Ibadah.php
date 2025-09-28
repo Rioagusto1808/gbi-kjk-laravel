@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Ibadah extends Model
 {
@@ -53,4 +54,26 @@ class Ibadah extends Model
     {
         return $this->hasMany(pelayananIbadah::class, 'ibadah_id');
     }
+    
+    protected $appends = ['status_dynamic'];
+
+    public function getStatusDynamicAttribute()
+    {
+        $now = Carbon::now();
+
+        if ($this->tanggal_mulai && $this->tanggal_mulai->isFuture()) {
+            return 'Akan Datang';
+        }
+
+        if ($this->tanggal_mulai && $this->tanggal_selesai && $now->between($this->tanggal_mulai, $this->tanggal_selesai)) {
+            return 'Sedang Berlangsung';
+        }
+
+        if ($this->tanggal_selesai && $this->tanggal_selesai->isPast()) {
+            return 'Selesai';
+        }
+
+        return $this->status; // fallback ke kolom status DB
+    }
+
 }

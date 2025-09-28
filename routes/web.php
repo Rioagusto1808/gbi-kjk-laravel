@@ -50,7 +50,7 @@ Route::post('/kontak-kami', [KontakKamiController::class, 'store'])
 
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth', 'check_status_user'])->group(function () {
+Route::middleware(['auth', 'check_status_user', 'verified'])->group(function () {
 
     // ================= Dashboard Redirect =================
     Route::get('/dashboard', function () {

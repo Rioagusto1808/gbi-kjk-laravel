@@ -49,7 +49,7 @@
                             <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ $i->jenis }}</h3>
                             <!-- Status Badge -->
                             @php
-                                $color = match ($i->status) {
+                                $color = match ($i->status_dynamic) {
                                     'Akan Datang' => 'bg-yellow-100 text-yellow-700',
                                     'Sedang Berlangsung' => 'bg-blue-100 text-blue-700',
                                     'Selesai' => 'bg-green-100 text-green-700',
@@ -57,7 +57,7 @@
                                 };
                             @endphp
                             <span class="px-3 py-1 text-xs font-semibold rounded-full {{ $color }}">
-                                {{ $i->status }}
+                                {{ $i->status_dynamic }}
                             </span>
                         </div>
                         <p class="text-sm text-gray-600 mb-2">Tema : {{ $i->tema ?? '-' }}</p>

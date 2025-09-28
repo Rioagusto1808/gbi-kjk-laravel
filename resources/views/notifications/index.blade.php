@@ -29,18 +29,20 @@
                         </div>
 
                         <div class="flex-1">
-                            <p class="text-sm font-semibold text-gray-800">
-                                {{ $notif->data['nama'] ?? 'Pengirim' }}
-                                <span class="text-xs text-gray-500">
-                                    ({{ $notif->data['email'] ?? '-' }})
-                                </span>
-                            </p>
-                            <p class="text-sm text-gray-700 mt-1">
-                                {{ $notif->data['pesan'] ?? '-' }}
-                            </p>
-                            <p class="text-xs text-gray-400 mt-1">
-                                {{ $notif->created_at->diffForHumans() }}
-                            </p>
+                            <a href="{{ $notif->data['url'] ?? '#' }}" class="block hover:underline">
+                                <p class="text-sm font-semibold text-gray-800">
+                                    {{ $notif->data['nama'] ?? 'Pengirim' }}
+                                    <span class="text-xs text-gray-500">
+                                        ({{ $notif->data['email'] ?? '-' }})
+                                    </span>
+                                </p>
+                                <p class="text-sm text-gray-700 mt-1">
+                                    {{ $notif->data['pesan'] ?? '-' }}
+                                </p>
+                                <p class="text-xs text-gray-400 mt-1">
+                                    {{ $notif->created_at->diffForHumans() }}
+                                </p>
+                            </a>
                         </div>
 
                         @if (is_null($notif->read_at))

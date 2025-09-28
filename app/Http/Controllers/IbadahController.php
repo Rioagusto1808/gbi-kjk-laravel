@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\IbadahRequest;
 use App\Models\Ibadah;
+use App\Models\User;
+use App\Notifications\IbadahCreatedNotif;
 use Illuminate\Http\Request;
 
 class IbadahController extends Controller
@@ -69,9 +71,14 @@ class IbadahController extends Controller
 
     public function store(IbadahRequest $request)
     {
-        Ibadah::create($request->validated());
+        $ibadah = Ibadah::create($request->validated());
+        $users = User::role('jemaat')->get();
 
-        return redirect()->route('ibadah.index')->with('success', 'Ibadah berhasil ditambahkan.');
+        foreach ($users as $user) {
+        $user->notify(new IbadahCreatedNotif($ibadah));
+    }
+
+        return redirect()->route('ibadah.index')->with('success', 'Ibadah berhasil ditambahkan & email notifikasi sudah dikirim.');
     }
 
     public function edit(Ibadah $ibadah)

@@ -12,6 +12,7 @@
         <table class="min-w-full divide-y divide-gray-200 text-sm">
             <thead class="bg-indigo-600 text-white">
                 <tr>
+                    <th class="px-6 py-3 text-left">No</th>
                     <th class="px-6 py-3 text-left">Nama Jemaat</th>
                     <th class="px-6 py-3 text-left">Status</th>
                     <th class="px-6 py-3 text-left">Hadir</th>
@@ -19,8 +20,9 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-                @foreach ($peserta as $p)
+                @foreach ($peserta as $index => $p)
                     <tr>
+                        <td class="px-6 py-4">{{ $peserta->firstItem() + $index }}</td>
                         <td class="px-6 py-4">{{ $p->jemaat->name ?? '-' }}</td>
                         <td class="px-6 py-4">
                             <span

@@ -23,9 +23,9 @@
 
             {{-- Tombol navigasi (opsional) --}}
             <!-- <button onclick="prevSlide()"
-                class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full">‹</button>
-            <button onclick="nextSlide()"
-                class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full">›</button> -->
+                        class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full">‹</button>
+                    <button onclick="nextSlide()"
+                        class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full">›</button> -->
         </div>
     </section>
 
@@ -115,7 +115,7 @@
 
                         <p class="text-xs text-gray-500 mb-2">
                             @if ($b->published_at)
-                                {{ $b->published_at->translatedFormat('d F Y') }}
+                                {{ $b->published_at->translatedFormat('d F Y | H:i') }} WIB
                             @else
                                 <span class="italic text-gray-400">Belum dipublikasikan</span>
                             @endif
@@ -170,7 +170,7 @@
 
                     {{-- Penulis & tanggal --}}
                     <div class="mt-4 text-sm text-gray-500 flex justify-between">
-                        <p>{{ $r->created_at->translatedFormat('d F Y') }}</p>
+                        <p>{{ $r->created_at->translatedFormat('d F Y | H:i') }} WIB</p>
                         <p class="font-medium">✍️ {{ $r->penulis ?? 'Admin' }}</p>
 
                     </div>
@@ -205,17 +205,20 @@
                 <div
                     class="bg-gray-100 shadow rounded-lg p-6 hover:shadow-lg transition min-w-[260px] md:min-w-0 flex-shrink-0">
 
-                    {{-- Status Badge --}}
-                    <span
-                        class="inline-block mb-2 px-3 py-1 text-xs rounded-full
+                    <div class="flex justify-between">
+                        {{-- Jenis --}}
+                        <h3 class="text-xl font-bold text-red-700">{{ $j->jenis }}</h3>
+                        {{-- Status Badge --}}
+                        <span
+                            class="inline-block mb-2 px-3 py-1 text-xs rounded-full
                         @if ($j->status === 'Sedang Berlangsung') bg-green-100 text-green-700
                         @elseif($j->status === 'Akan Datang') bg-yellow-100 text-yellow-700
                         @else bg-gray-200 text-gray-600 @endif">
-                        {{ $j->status }}
-                    </span>
+                            {{ $j->status }}
+                        </span>
+                        {{-- Tema --}}
 
-                    {{-- Jenis & Tema --}}
-                    <h3 class="text-xl font-bold text-red-700">{{ $j->jenis }}</h3>
+                    </div>
                     <p class="mt-1 text-gray-800 italic">Tema: {{ $j->tema ?? 'Belum tersedia' }}</p>
 
                     {{-- Ayat --}}
@@ -259,7 +262,7 @@
     </section>
 
     {{-- Event --}}
-    <section id="event" class="container mx-auto px-6 py-12">
+    <section id="event" class="container bg-gray-200 mx-auto px-6 py-12">
         <h2 class="text-3xl font-bold mb-6 text-center">Event Gereja</h2>
 
         <div class="flex space-x-4 overflow-x-auto pb-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-6 md:space-x-0">
@@ -331,7 +334,7 @@
         @endif
     </section>
 
-    <section id="galeri" class="px-6 py-12 bg-gray-100">
+    <section id="galeri" class="px-6 py-12 bg-white">
         <h2 class="text-3xl font-bold mb-6 text-center">Galeri Kegiatan</h2>
 
         <div class="relative">
@@ -347,13 +350,13 @@
 
             <!-- Tombol navigasi -->
             <!-- <button onclick="document.getElementById('galeri-scroll').scrollBy({left: -300, behavior: 'smooth'})"
-                class="absolute top-1/2 left-0 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full">
-                ‹
-            </button>
-            <button onclick="document.getElementById('galeri-scroll').scrollBy({left: 300, behavior: 'smooth'})"
-                class="absolute top-1/2 right-0 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full">
-                ›
-            </button> -->
+                        class="absolute top-1/2 left-0 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full">
+                        ‹
+                    </button>
+                    <button onclick="document.getElementById('galeri-scroll').scrollBy({left: 300, behavior: 'smooth'})"
+                        class="absolute top-1/2 right-0 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full">
+                        ›
+                    </button> -->
         </div>
     </section>
 
